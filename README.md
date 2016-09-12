@@ -1,3 +1,3 @@
 # Password Generator
 
-See the live page at `<a href="https://tatomyr.github.io/pw/">tatomyr.github.io/pw</a>`
+See the live page at [tatomyr.github.io/pw](https://tatomyr.github.io/pw/)
