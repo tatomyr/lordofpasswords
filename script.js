@@ -118,10 +118,12 @@ jQuery(document).ready(function() {
 
 			}, 6000);
 
-      copy(
-        pw($("#service").val(), $("#salt").val(), $("#pwLength").val())
-      );
-      
+      // This works...
+      document.execCommand('copy');
+
+      // But why it don't works?!!
+      // copy( pw($("#service").val(), $("#salt").val(), $("#pwLength").val()) );
+
     }
 
 	};
