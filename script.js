@@ -104,19 +104,19 @@ jQuery(document).ready(function() {
 
 				$("#service").val("");
 
-			}, 2000);
+			}, 1000);
 
 			setTimeout(function () {
 
 				$("#salt").val("");
 
-			}, 4000);
+			}, 2000);
 
 			setTimeout(function () {
 
 				$("#password").val("");
 
-			}, 6000);
+			}, 3000);
 
       // This works...
       document.execCommand('copy');
