@@ -118,7 +118,11 @@ jQuery(document).ready(function() {
 
 			}, 6000);
 
-		}
+      copy(
+        pw($("#service").val(), $("#salt").val(), $("#pwLength").val())
+      );
+      
+    }
 
 	};
 
