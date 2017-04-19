@@ -67,6 +67,11 @@ const pwStart = () => {
         getPassword(document.getElementById('pw-service').value);
       });
 
+      document.getElementById('pw-close').addEventListener('click', () => {
+        document.getElementById('pw-frame').remove();
+        pwStart();
+      });
+
       document.getElementById('pw-salt').focus();
     });
   }
@@ -84,6 +89,7 @@ const getPassword = (service) => {
 
   document.getElementById('pw-frame').innerHTML = `<input id="pw-password" value="${pw(service, salt, pwLength)}" style="${elementsStyle}" />`;
   document.getElementById('pw-password').select();
+  // This copies selected:
   document.execCommand('copy');
   setTimeout(() => {
     document.getElementById('pw-frame').remove();
