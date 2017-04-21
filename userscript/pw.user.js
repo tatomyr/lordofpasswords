@@ -88,8 +88,9 @@ const getPassword = (service) => {
   const pwLength = document.getElementById('pw-length').value;
 
   document.getElementById('pw-frame').innerHTML = `<input id="pw-password" value="${pw(service, salt, pwLength)}" style="${elementsStyle}" />`;
+  // This selects password to be copied futher:
   document.getElementById('pw-password').select();
-  // This copies selected:
+  // This copies selected password:
   document.execCommand('copy');
   setTimeout(() => {
     document.getElementById('pw-frame').remove();

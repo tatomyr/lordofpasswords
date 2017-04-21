@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html><head>
+
+	<title>Password Generator</title>
+
+	<!-- BootStrap -->
+	<meta charset="utf-8">	<!--meta name="viewport" content="width=device-width, initial-scale=1" >
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script -->
+
+	<!-- Babel.js -->
+
+
+
+	<!-- Own resources -->
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js"></script>
+</head><body>
+  <div class="container-fluid">
+
+
+
+    <div class="page-header">
+			<h1>Password Generator</h1>
+			<h6>keep in mind one 'salt'</h6>
+    </div>
+
+		<form >
+			<!-- form class="" action="#" method="post" -->
+				<input type="number" id="pwLength" placeholder="Password length..." value=8 onchange="getPassword()" ><br>
+				<input type="text" id="service" placeholder="Service (site) name..." onchange="getPassword()" ><br>
+				<input type="password" id="salt" placeholder="'Salt'..." onchange="getPassword()" ><br>
+				<input type="button" value="Get password" onclick="getPassword()"><br>
+			<!-- /form -->
+			<input type="text" id="password" placeholder="Password..." >
+		</form>
+
+
+
+  </div>
+
+
+	<script>
+
+
+	// --------------- From https://learn.javascript.ru/generator -------------(
+	/*
+	function* generateSequence(start, end) {
+		for (let i = start; i <= end; i++) yield i;
+	}
+
+	function* generateAlphaNum() {
+		yield* generateSequence(48, 57);
+		yield* generateSequence(65, 90);
+		yield* generateSequence(97, 122);
+	}
+
+	const charSet = () => {
+		let str = "";
+		for(let code of generateAlphaNum()) str += String.fromCharCode(code);
+		return str;
+	}
+	*/
+	// ------------------------------------------------------------------------)
+
+
+	</script>
+
+</body></html>
