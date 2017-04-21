@@ -4,6 +4,7 @@
 // @description	Generating of secure passwords for sites
 // @include     https://*
 // @include     http://*
+// @exclude     http://localhost*
 // @version     0.0.1
 // @grant       GM_getValue
 // @grant       GM_setValue
