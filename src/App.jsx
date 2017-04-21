@@ -11,30 +11,24 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('refs--->',document.getElementById('service'))
     document.getElementById('service').focus();
   }
 
   getPassword(e) {
-    console.log(this, e);
-
     const service = e.target.service.value.toString();
     const salt = e.target.salt.value.toString();
     const pwLength = e.target.pwLength.value;
-
-    console.log(service, salt, pwLength);
 
     if (service && salt && pwLength) {
       this.setState({ password: this.pw(service, salt, pwLength) });
       setTimeout(() => {
         this.refs.password.select();
+        document.execCommand('copy');
       }, 0);
       setTimeout(() => {
         this.setState({ password: '' });
-        console.log('refs--->',document.getElementById('service'))
         document.getElementById('service').focus();
-        // setTimeout.
-      }, 3000);
+      }, 1000);
     }
   }
 
