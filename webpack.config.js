@@ -16,7 +16,8 @@ var config = {
         test: /\.jsx?/,
         include: SRC_DIR,
         loader: 'babel-loader'
-      }
+      },
+      // { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
     ]
   }
 };

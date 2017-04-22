@@ -2,18 +2,42 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  font-family: Arial;
 }
 
 label {
   display: block;
+  color: grey;
 }
 
 input {
   text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: white;
+  background-color: black;
+}
+
+input:focus {
+  font-weight: bold;
+}
+
+input[type=submit] {
+  cursor: pointer;
 }
 
 .container-fluid {
   display: inline-block;
   margin: 0 auto;
   padding: 0;
+  max-width: 400px;
+  height: 100vh;
+  color: white;
+  background-color: black;
+}
+
+.input-container {
+  padding: 10px 0;
 }
