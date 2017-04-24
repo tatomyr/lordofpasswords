@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 
 import Inputs from './components/Inputs.jsx';
 import Banner from './components/Banner.jsx';
+import Spinner from './components/Spinner.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      password: '',
+      displaySpinner: 'none'
+    };
   }
 
   componentDidMount() {
@@ -16,7 +20,7 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    console.clear();
+    // console.clear();
 
     const service = e.target.service.value.toString();
     const salt = e.target.salt.value.toString();
@@ -24,17 +28,21 @@ class App extends React.Component {
     localStorage.pwLength = pwLength;
 
     if (service && salt && pwLength) {
-      console.log('----------');
-      this.setState({ password: this.getRecurrPw(service, salt, pwLength) });
+      console.log('1>----------');
+      this.setState({ displaySpinner: 'block' });
+      console.log('2>----------');
       setTimeout(() => {
-        this.refs.password.select();
-        if (document.execCommand('copy')) {
-          // Doesn't work in Firefox
-          setTimeout(() => {
-            this.setState({ password: '' });
-            document.getElementById('service').focus();
-          }, 1000);
-        }
+        this.setState({ password: this.getRecurrPw(service, salt, pwLength) });
+        setTimeout(() => {
+          this.refs.password.select();
+          if (document.execCommand('copy')) {
+            // Doesn't work in Firefox
+            setTimeout(() => {
+              this.setState({ password: '' });
+              document.getElementById('service').focus();
+            }, 1000);
+          }
+        }, 0);
       }, 0);
     }
 
@@ -55,6 +63,8 @@ class App extends React.Component {
     }
     console.log('--->',  numbersCount,upperCasedCount, lowerCasedCount,)
     if (numbersCount >=2 && upperCasedCount >= 1 && lowerCasedCount >= 1) {
+      this.setState({ displaySpinner: 'none' });
+
       return password;
     } else {
       return this.getRecurrPw(password, salt, pwLength);
@@ -150,6 +160,7 @@ class App extends React.Component {
             </div>)}
         </div>
         <Banner />
+        <Spinner display={this.state.displaySpinner} />
       </div>
     );
   }

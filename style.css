@@ -53,7 +53,7 @@ input[type=submit] {
   background: -moz-linear-gradient(top, #ff5db1 48%, #ef017c 100%);
   background: -webkit-linear-gradient(top, #ff5db1 48%,#ef017c 100%);
   background: linear-gradient(to bottom, #ff5db1 48%,#ef017c 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
 
   right: -3px;
   top: 10px;
@@ -102,4 +102,16 @@ input[type=submit] {
 
 .banner__link:hover {
   color: white;
+}
+
+/* Spinner */
+
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(200, 50, 50, 0.5);
 }
