@@ -95,7 +95,7 @@ class App extends React.Component {
 
       console.log(pwArr[i % pwLength] );
       pwArr[i % pwLength] = (pwArr[i % pwLength] || 0) +
-        i + service.charCodeAt(j) ** 3 + innerSalt.charCodeAt(k) ** 3;
+        i + Math.pow(service.charCodeAt(j), 2)  + Math.pow(innerSalt.charCodeAt(k), 2);
 
 
       console.log(
