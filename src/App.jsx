@@ -94,7 +94,7 @@ class App extends React.Component {
       let k = (i + kOffset) % innerSalt.length;
 
       console.log(pwArr[i % pwLength] );
-      pwArr[i % pwLength] = pwArr[i % pwLength] || 0 +
+      pwArr[i % pwLength] = (pwArr[i % pwLength] || 0) +
         i + service.charCodeAt(j) ** 3 + innerSalt.charCodeAt(k) ** 3;
 
 
@@ -103,7 +103,7 @@ class App extends React.Component {
         service[j],
         `${innerSalt[k]}=${innerSalt}[${k}]`,
         pwArr[i % pwLength], pwArr[i % pwLength] % 62, this.pwChar(pwArr[i % pwLength]), i % pwLength,
-        i >= pwLength && i >= service.length && i >= innerSalt.length
+        // i >= pwLength && i >= service.length && i >= innerSalt.length
       );
 
     }
@@ -113,7 +113,7 @@ class App extends React.Component {
   }
 
   pwChar(code) {
-    const pwCharSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const pwCharSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; // 62 symbols
     return pwCharSet[code % pwCharSet.length];
   }
 
