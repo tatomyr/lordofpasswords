@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    // console.clear();
+    console.clear();
 
     const service = e.target.service.value.toString();
     const salt = e.target.salt.value.toString();
@@ -32,9 +32,12 @@ class App extends React.Component {
       this.setState({ displaySpinner: 'block' });
       console.log('2>----------');
       setTimeout(() => {
-        this.setState({ password: this.getRecurrPw(service, salt, pwLength) });
-        setTimeout(() => {
+        this.getRecurrPw(service, salt, pwLength, (password) => {
+          this.setState({ password });
+
           this.refs.password.select();
+          console.log('copied:',document.execCommand('copy'));
+
           if (document.execCommand('copy')) {
             // Doesn't work in Firefox
             setTimeout(() => {
@@ -42,15 +45,15 @@ class App extends React.Component {
               document.getElementById('service').focus();
             }, 1000);
           }
-        }, 0);
-      }, 0);
+        });
+      }, 10);
     }
 
     if (service && !salt) document.getElementById('salt').focus();
     if (!service) document.getElementById('service').focus();
   }
 
-  getRecurrPw(service, salt, pwLength) {
+  getRecurrPw(service, salt, pwLength, callback) {
     const password = this.pw3(service, salt, pwLength);
 
     let upperCasedCount = 0;
@@ -62,12 +65,12 @@ class App extends React.Component {
     	lowerCasedCount += val.toLowerCase() === val && isNaN(+val) && 1 || 0;
     }
     console.log('--->',  numbersCount,upperCasedCount, lowerCasedCount,)
-    if (numbersCount >=2 && upperCasedCount >= 1 && lowerCasedCount >= 1) {
+    if (numbersCount >= 2 && upperCasedCount >= 1 && lowerCasedCount >= 1) {
       this.setState({ displaySpinner: 'none' });
 
-      return password;
+      return callback(password);
     } else {
-      return this.getRecurrPw(password, salt, pwLength);
+      return this.getRecurrPw(password, salt, pwLength, callback);
     }
   }
 
