@@ -20,7 +20,9 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    console.clear();
+    // console.clear();
+
+    document.getElementById('progress').innerHTML += ` 1 `;
 
     const service = e.target.service.value.toString();
     const salt = e.target.salt.value.toString();
@@ -28,19 +30,23 @@ class App extends React.Component {
     localStorage.pwLength = pwLength;
 
     if (service && salt && pwLength) {
+      document.getElementById('progress').innerHTML += ` 2 `;
       console.log('1>----------');
       this.setState({ displaySpinner: 'block' });
       console.log('2>----------');
       setTimeout(() => {
+        document.getElementById('progress').innerHTML += ` 3 `;
         this.getRecurrPw(service, salt, pwLength, (password) => {
           this.setState({ password });
-
+          document.getElementById('progress').innerHTML += ` 4 `;
           this.refs.password.select();
           console.log('copied:',document.execCommand('copy'));
 
           if (document.execCommand('copy')) {
             // Doesn't work in Firefox
+            document.getElementById('progress').innerHTML += ` 5 `;
             setTimeout(() => {
+              document.getElementById('progress').innerHTML += ` 6 `;
               this.setState({ password: '' });
               document.getElementById('service').focus();
             }, 1000);
@@ -164,6 +170,7 @@ class App extends React.Component {
         </div>
         <Banner />
         <Spinner display={this.state.displaySpinner} />
+        <div id="progress">=</div>
       </div>
     );
   }
