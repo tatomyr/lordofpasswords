@@ -60,7 +60,10 @@ class App extends React.Component {
   }
 
   getRecurrPw(service, salt, pwLength, callback) {
+    document.getElementById('progress').innerHTML += ` 3:1 `;
+
     const password = this.pw3(service, salt, pwLength);
+    document.getElementById('progress').innerHTML += ` 3:2 `;
 
     let upperCasedCount = 0;
     let lowerCasedCount = 0;
@@ -70,12 +73,17 @@ class App extends React.Component {
       upperCasedCount += val.toUpperCase() === val && isNaN(+val) && 1 || 0;
     	lowerCasedCount += val.toLowerCase() === val && isNaN(+val) && 1 || 0;
     }
+    document.getElementById('progress').innerHTML += ` 3:3 `;
+
     console.log('--->',  numbersCount,upperCasedCount, lowerCasedCount,)
     if (numbersCount >= 2 && upperCasedCount >= 1 && lowerCasedCount >= 1) {
       this.setState({ displaySpinner: 'none' });
+      document.getElementById('progress').innerHTML += ` 3:4u `;
 
       return callback(password);
     } else {
+      document.getElementById('progress').innerHTML += ` 3:4d `;
+
       return this.getRecurrPw(password, salt, pwLength, callback);
     }
   }
