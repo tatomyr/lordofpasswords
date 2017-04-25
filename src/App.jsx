@@ -68,11 +68,20 @@ class App extends React.Component {
     let upperCasedCount = 0;
     let lowerCasedCount = 0;
     let numbersCount = 0;
+    /*
     for (let val of password) {
       numbersCount += !isNaN(+val) && 1 || 0;
       upperCasedCount += val.toUpperCase() === val && isNaN(+val) && 1 || 0;
     	lowerCasedCount += val.toLowerCase() === val && isNaN(+val) && 1 || 0;
     }
+    */
+    for (let index = 0; index < password.length; index++) {
+      let val = password[index];
+      numbersCount += !isNaN(+val) && 1 || 0;
+      upperCasedCount += val.toUpperCase() === val && isNaN(+val) && 1 || 0;
+    	lowerCasedCount += val.toLowerCase() === val && isNaN(+val) && 1 || 0;
+    }
+
     document.getElementById('progress').innerHTML += ` 3:3 `;
 
     console.log('--->',  numbersCount,upperCasedCount, lowerCasedCount,)
@@ -105,12 +114,21 @@ class App extends React.Component {
     document.getElementById('progress').innerHTML += ` pw:d `;
 
     let sum = 0;
+    /*
     for (let item of service) {
       sum += item.charCodeAt();
     }
     for (let item of salt) {
       sum += item.charCodeAt();
     }
+    */
+    for (let j = 0; j < service.length; j++) {
+      sum += service.charCodeAt(j);
+    }
+    for (let k = 0; k < salt.length; k++) {
+      sum += salt.charCodeAt(k);
+    }
+
     document.getElementById('progress').innerHTML += ` pw:e `;
     const jOffset = sum % service.length;
     const kOffset = sum % (salt.length + 1);
