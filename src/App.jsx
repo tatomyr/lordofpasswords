@@ -92,13 +92,17 @@ class App extends React.Component {
     document.getElementById('progress').innerHTML += ` pw:1 `;
 
     let service = service_.toString();
+    document.getElementById('progress').innerHTML += ` pw:a `;
     if (service.length === 1) {
       service += this.pwChar(service.charCodeAt());
     }
+    document.getElementById('progress').innerHTML += ` pw:b `;
     let salt = salt_.toString();
+    document.getElementById('progress').innerHTML += ` pw:c `;
     if (!((salt.length + 1) % service.length && service.length % (salt.length + 1))) {
       salt += this.pwChar((salt.length + service.length));
     }
+    document.getElementById('progress').innerHTML += ` pw:d `;
 
     let sum = 0;
     for (let item of service) {
@@ -107,11 +111,14 @@ class App extends React.Component {
     for (let item of salt) {
       sum += item.charCodeAt();
     }
+    document.getElementById('progress').innerHTML += ` pw:e `;
     const jOffset = sum % service.length;
     const kOffset = sum % (salt.length + 1);
+    document.getElementById('progress').innerHTML += ` pw:f `;
 
     // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly (??)
     const pwArr = [];
+    document.getElementById('progress').innerHTML += ` pw:g `;
     console.log(service, jOffset, salt, kOffset, pwArr, pwLength);
 
     document.getElementById('progress').innerHTML += ` pw:2 `;
