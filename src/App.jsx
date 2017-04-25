@@ -89,6 +89,8 @@ class App extends React.Component {
   }
 
   pw3(service_, salt_, pwLength) {
+    document.getElementById('progress').innerHTML += ` pw:1 `;
+
     let service = service_.toString();
     if (service.length === 1) {
       service += this.pwChar(service.charCodeAt());
@@ -112,6 +114,8 @@ class App extends React.Component {
     const pwArr = [];
     console.log(service, jOffset, salt, kOffset, pwArr, pwLength);
 
+    document.getElementById('progress').innerHTML += ` pw:2 `;
+
 
     for (let i = 0; !(i >= pwLength && i >= service.length && i >= (salt.length + 1)); i++) {
       let innerSalt = salt + this.pwChar(i);
@@ -134,7 +138,10 @@ class App extends React.Component {
       );
 
     }
+    document.getElementById('progress').innerHTML += ` pw:3 `;
+
     const password = pwArr.reduce((prev, item) => prev + this.pwChar(item), '');
+    document.getElementById('progress').innerHTML += ` pw:4 `;
     console.log(password);
     return password;
   }
