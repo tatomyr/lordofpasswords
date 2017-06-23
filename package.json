@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/tatomyr/pw.git"
   },
-  "author": "tatomyr <andrew.tatomyr@gmail.com>",
+  "author": "tatomyr",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tatomyr/pw/issues"
