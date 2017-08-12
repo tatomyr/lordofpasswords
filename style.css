@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -35,7 +39,7 @@ input[type=submit] {
   margin: 0 auto;
   padding: 50px 0;
   max-width: 400px;
-  height: 100vh;
+  min-height: 100vh;
   color: white;
   background-color: black;
 }
