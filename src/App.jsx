@@ -13,6 +13,9 @@ class App extends React.Component {
       password: '',
       displaySpinner: 'none'
     };
+
+    this.serviceWorkerRegistration();
+
   }
 
   componentDidMount() {
@@ -147,7 +150,16 @@ class App extends React.Component {
     }, 0);
   }
 
+  serviceWorkerRegistration() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./service-worker.js')
+        .then(() => { console.log('Service Worker Registered'); });
+    }
+  }
+
   render() {
+
     return (
       <div>
         <div className="container-fluid">
