@@ -29,14 +29,11 @@ class App extends React.Component {
     localStorage.pwLength = pwLength;
 
     if (service && salt && pwLength) {
-      console.log('1>----------');
       this.setState({ displaySpinner: 'block' });
-      console.log('2>----------');
       setTimeout(() => {
         this.getRecurrPw(service, salt, pwLength, (password) => {
           this.setState({ password });
           this.refs.password.select();
-          console.log('copied:',document.execCommand('copy'));
 
           if (document.execCommand('copy')) {
             // Doesn't work in Firefox
@@ -75,7 +72,6 @@ class App extends React.Component {
     }
 
 
-    console.log('--->',  numbersCount,upperCasedCount, lowerCasedCount,)
     if (numbersCount >= 2 && upperCasedCount >= 1 && lowerCasedCount >= 1) {
       this.setState({ displaySpinner: 'none' });
 
@@ -118,7 +114,6 @@ class App extends React.Component {
 
     // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly (??)
     const pwArr = [];
-    console.log(service, jOffset, salt, kOffset, pwArr, pwLength);
 
 
 
@@ -129,23 +124,11 @@ class App extends React.Component {
       let j = (i + jOffset) % service.length;
       let k = (i + kOffset) % innerSalt.length;
 
-      console.log(pwArr[i % pwLength] );
       pwArr[i % pwLength] = (pwArr[i % pwLength] || 0) +
         i + Math.pow(service.charCodeAt(j), 2)  + Math.pow(innerSalt.charCodeAt(k), 2);
-
-
-      console.log(
-        i,
-        service[j],
-        `${innerSalt[k]}=${innerSalt}[${k}]`,
-        pwArr[i % pwLength], pwArr[i % pwLength] % 62, this.pwChar(pwArr[i % pwLength]), i % pwLength,
-        // i >= pwLength && i >= service.length && i >= innerSalt.length
-      );
-
     }
 
     const password = pwArr.reduce((prev, item) => prev + this.pwChar(item), '');
-    console.log(password);
     return password;
   }
 
@@ -156,7 +139,6 @@ class App extends React.Component {
 
   handleClick() {
     // This works for Firefox:
-    console.log('created password:', this.refs.password.value);
     this.refs.password.select();
     document.execCommand('copy')
     this.setState({ password: '' });
