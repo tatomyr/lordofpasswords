@@ -5,6 +5,8 @@ import Inputs from './components/Inputs.jsx';
 import Banner from './components/Banner.jsx';
 import Spinner from './components/Spinner.jsx';
 
+if (location.hostname !== 'localhost' && location.protocol === 'http:') location.href = `https:${location.host}`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
