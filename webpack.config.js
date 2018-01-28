@@ -6,10 +6,10 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
   entry: `${SRC_DIR}/index.js`,
-  output: {
-    path: BUILD_DIR,
-    filename: 'main.js',
-  },
+  // output: {
+  //   path: BUILD_DIR,
+  //   filename: 'main.js',
+  // },
   devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -19,18 +19,6 @@ module.exports = {
       {
         test: /\.js?/,
         use: ['babel-loader'],
-      },
-      // {
-      //   test: /\.scss$/,
-      //   loaders: [
-      //     'css-loader',
-      //     'style-loader',
-      //     'sass-loader'
-      //   ]
-      // },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader',
       },
     ],
   },

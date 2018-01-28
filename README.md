@@ -12,3 +12,5 @@ Get the userscript for Greasemonkey/Tampermonkey: [get](http://tatomyr.github.io
 
 To start the project on `localhost:8080` type `$ npm run server` in Terminal.
 You have to restart whenever public files were changing.
+
+Don't forget to run `npm run build` before deployment.
