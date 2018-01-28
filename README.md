@@ -2,12 +2,13 @@
 
 Generates a hash password to each service using one 'salt' to hashing.
 
-See the live page at [tatomyr.github.io/pw](https://tatomyr.github.io/pw/)
+See the live page at https:pw.netlify.com
 
-See the old version [here](http://tatomyr.github.io/pw/old/)
+See the old version https:pw.netlify.com/old/
 
 Get the userscript for Greasemonkey/Tampermonkey: [get](http://tatomyr.github.io/pw/userscript/pw.user.js)
 
 # Development
 
-To start the project on `localhost:8080` type `$ npm run dev` in Terminal.
+To start the project on `localhost:8080` type `$ npm run server` in Terminal.
+You have to restart whenever public files were changing.

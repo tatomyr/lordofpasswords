@@ -2,8 +2,8 @@ const cacheName = 'pw-generator-app';
 const filesToCache = [
   '/',
   '/index.html',
-  '/build/bundle.js',
-  '/src/components/spinner.gif',
+  '/main.js',
+  '/spinner.gif',
 ];
 
 self.addEventListener('install', e => {
