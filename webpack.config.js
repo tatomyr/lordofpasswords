@@ -1,25 +1,25 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'build');
-var SRC_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'dist');
+const SRC_DIR = path.resolve(__dirname, 'src');
 
-var config = {
-  entry: SRC_DIR + '/App.jsx',
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
+module.exports = {
+  entry: `${SRC_DIR}/index.js`,
+  // output: {
+  //   path: BUILD_DIR,
+  //   filename: 'main.js',
+  // },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?/,
-        include: SRC_DIR,
-        loader: 'babel-loader'
+        test: /\.js?/,
+        use: ['babel-loader'],
       },
-      // { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
-    ]
-  }
+    ],
+  },
 };
-
-module.exports = config;
