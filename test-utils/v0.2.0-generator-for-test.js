@@ -1,8 +1,8 @@
 // Legacy password hash generator v0.2.0
+/* eslint-disable */
 
 function pwChar(code) {
-  const pwCharSet =
-    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' // 62 symbols
+  const pwCharSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' // 62 symbols
   return pwCharSet[code % pwCharSet.length]
 }
 
@@ -12,9 +12,7 @@ function pw3(service_, salt_, pwLength) {
     service += pwChar(service.charCodeAt())
   }
   let salt = salt_.toString()
-  if (
-    !((salt.length + 1) % service.length && service.length % (salt.length + 1))
-  ) {
+  if (!((salt.length + 1) % service.length && service.length % (salt.length + 1))) {
     salt += pwChar(salt.length + service.length)
   }
 
@@ -41,11 +39,7 @@ function pw3(service_, salt_, pwLength) {
   // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly
   const pwArr = []
 
-  for (
-    let i = 0;
-    !(i >= pwLength && i >= service.length && i >= salt.length + 1);
-    i++
-  ) {
+  for (let i = 0; !(i >= pwLength && i >= service.length && i >= salt.length + 1); i++) {
     const innerSalt = salt + pwChar(i)
 
     // Service & salt offsets:
@@ -53,10 +47,7 @@ function pw3(service_, salt_, pwLength) {
     const k = (i + kOffset) % innerSalt.length
 
     pwArr[i % pwLength] =
-      (pwArr[i % pwLength] || 0) +
-      i +
-      service.charCodeAt(j) ** 2 +
-      innerSalt.charCodeAt(k) ** 2
+      (pwArr[i % pwLength] || 0) + i + service.charCodeAt(j) ** 2 + innerSalt.charCodeAt(k) ** 2
   }
 
   const password = pwArr.reduce((prev, item) => prev + pwChar(item), '')

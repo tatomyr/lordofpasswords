@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const cacheName = 'masterpassword'
 const filesToCache = ['/', '/index.html', '/app.js', '/style.css']
 
@@ -8,14 +9,18 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   console.log('[ServiceWorker] Activate')
-  e.waitUntil(caches.keys().then(keyList =>
-    // eslint-disable-next-line consistent-return, array-callback-return
-    Promise.all(keyList.map(key => {
-      if (key !== cacheName) {
-        console.log('[ServiceWorker] Removing old cache', key)
-        return caches.delete(key)
-      }
-    }))))
+  e.waitUntil(
+    caches.keys().then(keyList => Promise.all(
+      // FIXME: linter errors
+      // eslint-disable-next-line array-callback-return, consistent-return
+      keyList.map(key => {
+        if (key !== cacheName) {
+          console.log('[ServiceWorker] Removing old cache', key)
+          return caches.delete(key)
+        }
+      })
+    ))
+  )
 
   return self.clients.claim()
 })

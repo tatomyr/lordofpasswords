@@ -5,7 +5,7 @@ We use our own hashing algorithm to ensure the hashed password contains the need
 These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
 If the user chose using special symbols, the password should also contain at least 1 special character.
 
-See the live page at https://TODO:provide-link
+See the live page at [TODO: provide better link](https://sharp-kilby-69a6e3.netlify.com/)
 
 See old versions at https://pw.netlify.com
 
@@ -29,4 +29,4 @@ Run end-to-end tests in terminal with `$ npm run e2e`.
 # Deployment
 
 To deploy site on Netlify just push changes to the `master` branch.
-Build command for Netlify: `mkdir dist && cp -R src/* dist/`.
+Build command for Netlify: `npm run build` or `mkdir dist && cp -R src/* dist/`.

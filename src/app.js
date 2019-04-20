@@ -46,8 +46,8 @@ const app = (() => {
       // Service & salt offsets:
       const j = (i + jOffset) % service.length
       const k = (i + kOffset) % innerSalt.length
-      pwArr[i % pwLength] =
-        (pwArr[i % pwLength] || 0) + i + service.charCodeAt(j) ** 2 + innerSalt.charCodeAt(k) ** 2
+      // eslint-disable-next-line max-len
+      pwArr[i % pwLength] = (pwArr[i % pwLength] || 0) + i + service.charCodeAt(j) ** 2 + innerSalt.charCodeAt(k) ** 2
     }
     const password = pwArr.reduce((prev, item) => prev + pwChar(item), '')
     return password
@@ -74,10 +74,10 @@ const app = (() => {
     // FIXME: delete log
     console.log(password, ':::', upperCasedCount, lowerCasedCount, numbersCount, specialsCount)
     if (
-      numbersCount >= 2 &&
-      upperCasedCount >= 1 &&
-      lowerCasedCount >= 1 &&
-      (!special || specialsCount >= 1)
+      numbersCount >= 2
+      && upperCasedCount >= 1
+      && lowerCasedCount >= 1
+      && (!special || specialsCount >= 1)
     ) {
       // this.setState({ displaySpinner: 'none' })
       return callback(password)

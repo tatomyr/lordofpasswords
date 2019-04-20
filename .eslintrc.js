@@ -1,10 +1,20 @@
 module.exports = {
-  extends: 'airbnb',
   env: {
     browser: true,
+    es6: true,
+  },
+  extends: 'airbnb-base',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
   },
   rules: {
+    semi: ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
+    'import/prefer-default-export': 'off',
     'comma-dangle': [
       'error',
       {
@@ -12,12 +22,9 @@ module.exports = {
         objects: 'always-multiline',
         imports: 'always-multiline',
         exports: 'always-multiline',
-        functions: 'ignore',
+        functions: 'never',
       },
     ],
-    'import/prefer-default-export': 'off',
-    semi: ['error', 'never'],
-    'no-restricted-globals': 'off',
     'no-mixed-operators': 'off',
     'no-plusplus': 'off',
   },
