@@ -1,24 +1,31 @@
 module.exports = {
-    "extends": "airbnb",
-    "env": {
-      "browser": true,
-    },
-    rules: {
-      "arrow-parens": ["error", "as-needed"],
-      "comma-dangle": ["warn", {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "ignore"
-      }],
-
-      "no-restricted-globals": "off",
-      "no-mixed-operators": "off",
-      "no-plusplus": "off",
-
-      "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
-      "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
-
-    }
-};
+  env: {
+    browser: true,
+    es6: true,
+  },
+  extends: 'airbnb-base',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+  },
+  rules: {
+    semi: ['error', 'never'],
+    'arrow-parens': ['error', 'as-needed'],
+    'import/prefer-default-export': 'off',
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
+    'no-mixed-operators': 'off',
+    'no-plusplus': 'off',
+  },
+}
