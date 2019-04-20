@@ -12,11 +12,36 @@ body {
 header {
   background: wheat;
   padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-header > h1,
-header > h2 {
+header img {
+  width: 2.5rem;
+  transform: rotate(-15deg);
+  transition: transform 1s ease-in-out;
+}
+
+header:hover img {
+  width: 2.5rem;
+  transform: rotate(-20deg);
+  transition: transform 0.4s;
+}
+
+.generated {
+  transform: rotate(0);
+  transform: rotateX(50deg);
+}
+
+header div {
+  padding-left: 4px;
+}
+
+header h1,
+header h2 {
   color: #2b221c;
+  text-align: left;
 }
 
 body,

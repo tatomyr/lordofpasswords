@@ -112,6 +112,7 @@ const app = (() => {
     password: document.getElementById('password'),
     submitButton: document.getElementById('submit'),
     notification: document.getElementById('notification'),
+    key: document.getElementById('key'),
   }
 
   const savePasswordLength = ({
@@ -131,6 +132,7 @@ const app = (() => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    $element.key.className = 'generated'
     savePasswordLength(e)
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
@@ -147,6 +149,7 @@ const app = (() => {
           $element.password.className = 'hidden'
           $element.password.value = ''
           $element.notification.className = ''
+          $element.key.className = ''
         }, 1000)
       }
     })
