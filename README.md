@@ -1,16 +1,27 @@
 # Password Generator
 
-Generates a hash password to each service using one 'salt' to hashing.
+The app generates a unique hash password for each service using masterpassword.
+We use our own hashing algorithm to ensure the hashed password contains the needed amount of symbols of each type.
+These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
+If the user chose using special symbols, the password should also contain at least 1 special character.
 
-See the live page at https:pw.netlify.com
+See the live page at https://TODO:provide-link
 
-See the old version https:pw.netlify.com/old/
-
-Get the userscript for Greasemonkey/Tampermonkey: [get](http://tatomyr.github.io/pw/userscript/pw.user.js)
+See old versions at https://pw.netlify.com
 
 # Development
 
-To start the project on `localhost:8080` type `$ npm run server` in Terminal.
-You have to restart whenever public files were changing.
+To start the project on `localhost:8080` type `$ npm start` in Terminal.
 
-Don't forget to run `npm run build` before deployment.
+All files are available to edit and deploy inside `public/` folder.
+
+We don't minify nor optimize the code by intent to show users the actual code that run in the application.
+
+You may also try `$ npm run parcel` but you have to put some changes to `public/app.js` file.
+
+# Testing
+
+Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
+Notice that you have to have your development server started.
+
+Run end-to-end tests in terminal with `$ npm run e2e`.
