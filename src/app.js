@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const app = (() => {
   // Define constants
   const NUMBERS = '0123456789'
@@ -17,11 +18,7 @@ const app = (() => {
       service += pwChar(service.charCodeAt())
     }
     let salt = salt_.toString()
-    if (
-      !(
-        (salt.length + 1) % service.length && service.length % (salt.length + 1)
-      )
-    ) {
+    if (!((salt.length + 1) % service.length && service.length % (salt.length + 1))) {
       salt += pwChar(salt.length + service.length)
     }
     let sum = 0
@@ -44,30 +41,24 @@ const app = (() => {
     const kOffset = sum % (salt.length + 1)
     // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly
     const pwArr = []
-    for (
-      let i = 0;
-      !(i >= pwLength && i >= service.length && i >= salt.length + 1);
-      i++
-    ) {
+    for (let i = 0; !(i >= pwLength && i >= service.length && i >= salt.length + 1); i++) {
       const innerSalt = salt + pwChar(i)
       // Service & salt offsets:
       const j = (i + jOffset) % service.length
       const k = (i + kOffset) % innerSalt.length
       pwArr[i % pwLength] =
-        (pwArr[i % pwLength] || 0) +
-        i +
-        service.charCodeAt(j) ** 2 +
-        innerSalt.charCodeAt(k) ** 2
+        (pwArr[i % pwLength] || 0) + i + service.charCodeAt(j) ** 2 + innerSalt.charCodeAt(k) ** 2
     }
     const password = pwArr.reduce((prev, item) => prev + pwChar(item), '')
     return password
   }
 
-  const testFor = char => charsArray =>
-    charsArray.indexOf(char) === -1 ? 0 : 1
+  const testFor = char => charsArray => (charsArray.indexOf(char) === -1 ? 0 : 1)
 
   // Rehashing password to match needed conditions
-  const getRecurrPw = ({ service, salt, pwLength, special }, callback) => {
+  const getRecurrPw = ({
+    service, salt, pwLength, special,
+  }, callback) => {
     const password = pw3(service, salt, pwLength, special)
     let upperCasedCount = 0
     let lowerCasedCount = 0
@@ -81,14 +72,7 @@ const app = (() => {
       specialsCount += testIn(SPECIALS)
     }
     // FIXME: delete log
-    console.log(
-      password,
-      ':::',
-      upperCasedCount,
-      lowerCasedCount,
-      numbersCount,
-      specialsCount
-    )
+    console.log(password, ':::', upperCasedCount, lowerCasedCount, numbersCount, specialsCount)
     if (
       numbersCount >= 2 &&
       upperCasedCount >= 1 &&
@@ -98,7 +82,15 @@ const app = (() => {
       // this.setState({ displaySpinner: 'none' })
       return callback(password)
     }
-    return getRecurrPw({ service: password, salt, pwLength, special }, callback)
+    return getRecurrPw(
+      {
+        service: password,
+        salt,
+        pwLength,
+        special,
+      },
+      callback
+    )
   }
 
   const inputAdapter = ({
@@ -161,6 +153,7 @@ const app = (() => {
   }
 
   // Startup initial settings
+  // eslint-disable-next-line semi-style
   ;(function STARTUP() {
     lengthReset()
     $element.service.focus()
@@ -170,7 +163,7 @@ const app = (() => {
       // …so we have to hide the notification element completely a first time
       $element.notification.className = ''
     })
-  })()
+  }())
 
   return {
     handleSubmit,

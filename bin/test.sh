@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start testing server
-cd public && http-server -p 8081 &
+cd src && http-server -p 8081 &
 # Run tests with Cypress
 cypress run --config baseUrl=http://localhost:8081
 # Catch the most recent command response

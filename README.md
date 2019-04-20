@@ -13,11 +13,11 @@ See old versions at https://pw.netlify.com
 
 To start the project on `localhost:8080` type `$ npm start` in Terminal.
 
-All files are available to edit and deploy inside `public/` folder.
+All files are available to edit and deploy inside `src/` folder.
 
 We don't minify nor optimize the code by intent to show users the actual code that run in the application.
 
-You may also try `$ npm run parcel` but you have to put some changes to `public/app.js` file.
+You may also try `$ npm run parcel` but you have to put some changes to `src/app.js` file.
 
 # Testing
 
@@ -25,3 +25,8 @@ Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
 Notice that you have to have your development server started.
 
 Run end-to-end tests in terminal with `$ npm run e2e`.
+
+# Deployment
+
+To deploy site on Netlify just push changes to the `master` branch.
+Build command for Netlify: `mkdir dist && cp -R src/* dist/`.
