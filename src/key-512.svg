@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="512" width="512">
+  <ellipse
+    cx="102"
+    cy="256"
+    rx="76"
+    ry="90"
+    style="fill:none;stroke:purple;stroke-width:30"
+  />
+  <line
+    x1="180"
+    y1="256"
+    x2="490"
+    y2="256"
+    style="stroke:purple;stroke-width:30"
+  />
+  <line
+    x1="370"
+    y1="318"
+    x2="482"
+    y2="318"
+    style="stroke:purple;stroke-width:30"
+  />
+  <line
+    x1="454"
+    y1="228"
+    x2="454"
+    y2="346"
+    style="stroke:purple;stroke-width:30"
+  />
+  <line
+    x1="398"
+    y1="228"
+    x2="398"
+    y2="346"
+    style="stroke:purple;stroke-width:30"
+  />
+</svg>
