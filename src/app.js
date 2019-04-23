@@ -22,24 +22,14 @@ const app = (() => {
       salt += pwChar(salt.length + service.length)
     }
     let sum = 0
-    /* // Mobile IE doesn't support this
-          for (let item of service) {
-            sum += item.charCodeAt();
-          }
-          for (let item of salt) {
-            sum += item.charCodeAt();
-          }
-          /* */
     for (let j = 0; j < service.length; j++) {
       sum += service.charCodeAt(j)
     }
     for (let k = 0; k < salt.length; k++) {
       sum += salt.charCodeAt(k)
     }
-    /* */
     const jOffset = sum % service.length
     const kOffset = sum % (salt.length + 1)
-    // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly
     const pwArr = []
     for (let i = 0; !(i >= pwLength && i >= service.length && i >= salt.length + 1); i++) {
       const innerSalt = salt + pwChar(i)
@@ -79,7 +69,6 @@ const app = (() => {
       && lowerCasedCount >= 1
       && (!special || specialsCount >= 1)
     ) {
-      // this.setState({ displaySpinner: 'none' })
       return callback(password)
     }
     return getRecurrPw(
@@ -94,20 +83,20 @@ const app = (() => {
   }
 
   const inputAdapter = ({
-    length: { value: length },
+    passwordLength: { value: passwordLength },
     service: { value: service },
     masterpassword: { value: masterpassword },
     special: { checked: special },
   }) => ({
-    pwLength: +length,
+    pwLength: +passwordLength,
     service,
     salt: masterpassword,
     special,
   })
 
   // Define elements selectors
-  const $element = {
-    length: document.getElementById('length'),
+  const $elements = {
+    passwordLength: document.getElementById('passwordLength'),
     service: document.getElementById('service'),
     password: document.getElementById('password'),
     submitButton: document.getElementById('submit'),
@@ -117,7 +106,7 @@ const app = (() => {
 
   const savePasswordLength = ({
     target: {
-      length: { value },
+      passwordLength: { value },
     },
   }) => {
     localStorage.setItem('passwordLength', value)
@@ -125,31 +114,31 @@ const app = (() => {
 
   const lengthReset = () => {
     if (+localStorage.passwordLength) {
-      $element.length.value = +localStorage.passwordLength
+      $elements.passwordLength.value = +localStorage.passwordLength
     }
-    $element.length.className = ''
+    $elements.passwordLength.className = ''
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    $element.key.className = 'generated'
+    $elements.key.className = 'generated'
     savePasswordLength(e)
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
       lengthReset()
-      $element.submitButton.className = 'hidden'
-      $element.password.className = ''
-      $element.password.value = password
-      $element.password.select()
+      $elements.submitButton.className = 'hidden'
+      $elements.password.className = ''
+      $elements.password.value = password
+      $elements.password.select()
       if (document.execCommand('copy')) {
-        $element.notification.className = 'visible'
+        $elements.notification.className = 'visible'
         setTimeout(() => {
-          $element.service.focus()
-          $element.submitButton.className = ''
-          $element.password.className = 'hidden'
-          $element.password.value = ''
-          $element.notification.className = ''
-          $element.key.className = ''
+          $elements.service.focus()
+          $elements.submitButton.className = ''
+          $elements.password.className = 'hidden'
+          $elements.password.value = ''
+          $elements.notification.className = ''
+          $elements.key.className = ''
         }, 1000)
       }
     })
@@ -159,12 +148,12 @@ const app = (() => {
   // eslint-disable-next-line semi-style
   ;(function STARTUP() {
     lengthReset()
-    $element.service.focus()
+    $elements.service.focus()
     setTimeout(() => {
       // Make notification element displayable
       // This is needed for some browsers that cashe the visible state…
       // …so we have to hide the notification element completely a first time
-      $element.notification.className = ''
+      $elements.notification.className = ''
     })
   }())
 

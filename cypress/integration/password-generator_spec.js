@@ -9,7 +9,7 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.visit('/')
   })
   it('generating password of length 6 with the standard charset', () => {
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(6)
     cy.get('#service').type('service')
@@ -22,7 +22,7 @@ describe('Compatibility with the Classical Password Generator', () => {
     getRecurrPw(...data, pw => {
       password = pw
     })
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(data[2])
     cy.get('#service').type(data[0])
@@ -35,7 +35,7 @@ describe('Compatibility with the Classical Password Generator', () => {
     getRecurrPw(...data, pw => {
       password = pw
     })
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(data[2])
     cy.get('#service').type(data[0])
@@ -52,7 +52,7 @@ describe('Compatibility with the Classical Password Generator', () => {
     getRecurrPw(...data, pw => {
       password = pw
     })
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(data[2])
     cy.get('#service').type(data[0])
@@ -69,7 +69,7 @@ describe('Compatibility with the Classical Password Generator', () => {
     getRecurrPw(...data, pw => {
       password = pw
     })
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(data[2])
     cy.get('#service').type(data[0])
@@ -85,7 +85,7 @@ describe('Modern Password Generator', () => {
   })
   // TODO: provide more valid cases
   it('passes all the flow', () => {
-    cy.get('#length')
+    cy.get('#passwordLength')
       .clear()
       .type(6)
     cy.get('#service').type('service')
