@@ -47,23 +47,18 @@ header h2 {
 body,
 h1,
 h2,
-p,
 input,
 label,
 ul,
-li {
+li,
+h3,
+p {
   margin: 0;
   padding: 0;
 }
 
-h1,
-p {
-  color: rgb(235, 228, 192);
-}
-
 h1 {
   font-size: 1em;
-  text-transform: capitalize;
 }
 
 h2 {
@@ -71,13 +66,7 @@ h2 {
   font-weight: normal;
 }
 
-p#password {
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.main {
+main {
   margin: 0 auto;
   max-width: 500px;
   padding: 24px 16px;
@@ -241,4 +230,33 @@ footer ul li a {
   width: 50px;
   height: 50px;
   margin-top: calc(50vh - 25px);
+}
+
+/* Info page styles */
+h3 {
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  color: #f39e1e;
+  text-align: right;
+  border-bottom: 1px solid #f39e1e;
+  border-bottom-left-radius: 6px;
+  transition: border-bottom-left-radius 0.7s ease-in-out;
+}
+
+h3:hover {
+  border-bottom-left-radius: 0;
+}
+
+p {
+  color: #ebe4c0;
+  text-align: left;
+  padding: 0 0 12px 0;
+}
+
+p a {
+  color: #ebe4c0;
+}
+
+strong {
+  font-family: monospace;
 }
