@@ -1,5 +1,23 @@
+/* Reset */
 * {
   box-sizing: border-box;
+}
+body,
+h1,
+h2,
+input,
+label,
+ul,
+li,
+h3,
+p,
+a {
+  margin: 0;
+  padding: 0;
+}
+a {
+  all: unset;
+  cursor: pointer;
 }
 
 body {
@@ -44,19 +62,6 @@ header h1,
 header h2 {
   color: #2b221c;
   text-align: left;
-}
-
-body,
-h1,
-h2,
-input,
-label,
-ul,
-li,
-h3,
-p {
-  margin: 0;
-  padding: 0;
 }
 
 h1 {
@@ -133,8 +138,14 @@ section#options {
   align-items: flex-end;
 }
 
+@media screen and (max-width: 380px) {
+  section#options {
+    flex-direction: column;
+  }
+}
+
 section#options .form-group {
-  width: 50%;
+  width: 100%;
 }
 
 label#special {
@@ -198,7 +209,7 @@ footer {
   background: #000000;
   width: 100%;
   padding: 8px;
-  /* color: #eeeeee; */
+  color: #eeeeee;
 }
 
 footer ul {
@@ -209,12 +220,6 @@ footer ul li {
   list-style: none;
   display: inline-block;
   font-size: 0.75rem;
-}
-
-footer ul li a {
-  all: unset;
-  cursor: pointer;
-  color: #eeeeee;
 }
 
 /* Spinner */
@@ -228,7 +233,6 @@ footer ul li a {
 
   background-color: rgba(255, 20, 100, 0.5);
 }
-
 .spinner__img {
   width: 50px;
   height: 50px;
@@ -246,7 +250,7 @@ h3 {
   transition: border-radius 0.7s ease-in-out;
 }
 
-h3:hover {
+section:hover h3 {
   border-bottom-left-radius: 0;
 }
 
@@ -254,12 +258,4 @@ p {
   color: #ebe4c0;
   text-align: left;
   padding: 0 0 12px 0;
-}
-
-p a {
-  color: #ebe4c0;
-}
-
-strong {
-  font-family: monospace;
 }

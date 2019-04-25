@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable no-restricted-globals, no-console */
 const cacheName = 'masterpassword'
 const filesToCache = ['/', '/index.html', '/app.js', '/style.css']
 
