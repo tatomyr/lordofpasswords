@@ -203,6 +203,7 @@ input#password {
   transition: opacity 0.5s linear !important;
 }
 
+/* Footer styles */
 footer {
   position: absolute;
   bottom: 0;
@@ -212,14 +213,21 @@ footer {
   color: #eeeeee;
 }
 
-footer ul {
-  color: #7a7a7a;
-}
-
 footer ul li {
   list-style: none;
   display: inline-block;
   font-size: 0.75rem;
+}
+
+footer ul li::after {
+  content: '|';
+  color: #7a7a7a;
+  padding-left: 4px;
+  font-weight: 700;
+}
+
+footer ul li:last-child::after {
+  content: '';
 }
 
 /* Spinner */
