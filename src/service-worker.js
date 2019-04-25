@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals, no-console */
-const cacheName = 'masterpassword'
-const filesToCache = ['/', '/index.html', '/app.js', '/style.css']
+const cacheName = 'password-generator'
+const filesToCache = ['/', '/index.html', '/app.js', '/style.css', '/key-512.svg']
 
 self.addEventListener('install', e => {
   console.log('[ServiceWorker] Install')
