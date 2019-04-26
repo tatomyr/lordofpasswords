@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-
 import getRecurrPw from '../../test-utils/v0.2.0-generator-for-test'
-import { getRandom } from '../../test-utils/get-random'
+import { getRandom } from '../../test-utils/helpers'
 
 describe('Compatibility with the Classical Password Generator', () => {
   let password
@@ -76,42 +75,5 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#masterpassword').type(data[1])
     cy.get('#submit').click()
     cy.get('#password').should('have.value', password)
-  })
-})
-
-describe('Modern Password Generator', () => {
-  beforeEach(() => {
-    cy.visit('/')
-  })
-  // TODO: provide more valid cases
-  it('passes all the flow', () => {
-    cy.get('#passwordLength')
-      .clear()
-      .type(6)
-    cy.get('#service').type('service')
-    cy.get('#masterpassword').type('salt')
-    cy.get('#special').click()
-    cy.get('#submit').click()
-    cy.get('#password').should('have.value', '6Bt$70')
-    // cy.get('#notification').should('have.class', 'visible')
-  })
-  it('should redirect to the Info Page', () => {
-    cy.get('footer ul li a')
-      .first()
-      .click()
-    cy.location('pathname').should('eq', '/info.html')
-  })
-})
-
-describe('Info Page', () => {
-  beforeEach(() => {
-    cy.visit('/info.html')
-  })
-  it('contains link to home', () => {
-    cy.get('footer ul li a')
-      .first()
-      .contains('Home')
-      .click()
-    cy.location('pathname').should('eq', '/')
   })
 })
