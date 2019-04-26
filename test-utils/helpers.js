@@ -13,3 +13,8 @@ function getRandomString(min, max) {
 }
 
 export const getRandom = { int: getRandomInt, string: getRandomString }
+
+export const countOf = value => re => {
+  const arr = value.match(re)
+  return arr ? arr.length : 0
+}
