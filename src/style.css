@@ -2,6 +2,7 @@
 * {
   box-sizing: border-box;
 }
+
 body,
 h1,
 h2,
@@ -15,6 +16,7 @@ a {
   margin: 0;
   padding: 0;
 }
+
 a {
   all: unset;
   cursor: pointer;
@@ -29,12 +31,14 @@ body {
   min-height: 100vh;
 }
 
+/* Header styles */
 header {
   background: wheat;
   padding: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0 0 0 6px;
 }
 
 header img {
@@ -49,13 +53,17 @@ header:hover img {
   transition: transform 0.4s;
 }
 
-.generated {
+header .generated {
   transform: rotate(0);
   transform: rotateX(50deg);
 }
 
-header div {
-  padding-left: 4px;
+header > * {
+  padding-right: 4px;
+}
+
+header > :last-child {
+  padding-right: 0;
 }
 
 header h1,
@@ -73,6 +81,7 @@ h2 {
   font-weight: normal;
 }
 
+/* Main styles */
 main {
   margin: 0 auto;
   max-width: 500px;
@@ -107,15 +116,14 @@ input {
   outline: none;
   border: none;
   border-top: 1px solid #f39e1e;
-  border-top-right-radius: 6px;
+  border-radius: 0 6px 0 0;
   transition: border-radius 0.7s ease-in-out;
 }
 
 input:focus {
   font-weight: bold;
   background-color: #f39e1e;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 6px;
+  border-radius: 0 0 0 6px;
 }
 
 input::-webkit-outer-spin-button,
@@ -124,7 +132,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type='number'] {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
 }
 
 input[type='checkbox'] {
@@ -189,6 +197,7 @@ input#password {
   transition: opacity 1s linear 1s, transform 1s ease-out 1s;
 }
 
+/* Common styles */
 .hide-text {
   color: transparent;
 }
@@ -211,6 +220,7 @@ footer {
   width: 100%;
   padding: 8px;
   color: #eeeeee;
+  border-radius: 0 6px 0 0;
 }
 
 footer ul li {
@@ -230,23 +240,6 @@ footer ul li:last-child::after {
   content: '';
 }
 
-/* Spinner */
-.spinner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-
-  background-color: rgba(255, 20, 100, 0.5);
-}
-.spinner__img {
-  width: 50px;
-  height: 50px;
-  margin-top: calc(50vh - 25px);
-}
-
 /* Info page styles */
 h3 {
   font-size: 1rem;
@@ -254,16 +247,31 @@ h3 {
   color: #f39e1e;
   text-align: right;
   border-bottom: 1px solid #f39e1e;
-  border-bottom-left-radius: 6px;
+  border-radius: 0 0 0 6px;
   transition: border-radius 0.7s ease-in-out;
 }
 
 section:hover h3 {
-  border-bottom-left-radius: 0;
+  border-radius: 0;
 }
 
 p {
   color: #ebe4c0;
   text-align: left;
   padding: 0 0 12px 0;
+}
+
+p a {
+  text-decoration: underline;
+}
+
+main *::selection {
+  background-color: #f39e1e;
+  color: #eeeeee;
+}
+
+header,
+footer {
+  user-select: none;
+  -webkit-user-select: none;
 }
