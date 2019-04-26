@@ -6,6 +6,7 @@
   "scripts": {
     "parcel": "parcel src/index.html --port 8080",
     "start": "cd src && http-server -p 8080",
+    "ngrok": "ngrok http 8080",
     "lint": "eslint ./src/",
     "e2e": "bash bin/test.sh",
     "cypress": "cypress open --config baseUrl=http://localhost:8080",
@@ -35,6 +36,7 @@
     "eslint-plugin-import": "^2.17.2",
     "http-server": "^0.11.1",
     "husky": "^1.3.1",
+    "ngrok": "^3.1.1",
     "parcel": "^1.12.3"
   }
 }

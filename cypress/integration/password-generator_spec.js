@@ -95,4 +95,23 @@ describe('Modern Password Generator', () => {
     cy.get('#password').should('have.value', '6Bt$70')
     // cy.get('#notification').should('have.class', 'visible')
   })
+  it('should redirect to the Info Page', () => {
+    cy.get('footer ul li a')
+      .first()
+      .click()
+    cy.location('pathname').should('eq', '/info.html')
+  })
+})
+
+describe('Info Page', () => {
+  beforeEach(() => {
+    cy.visit('/info.html')
+  })
+  it('contains link to home', () => {
+    cy.get('footer ul li a')
+      .first()
+      .contains('Home')
+      .click()
+    cy.location('pathname').should('eq', '/')
+  })
 })

@@ -155,17 +155,19 @@ const app = (() => {
       // …so we have to hide the notification element completely a first time
       $elements.notification.className = ''
     })
-    /* TODO:
+    // Registering service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
         .then(registration => {
-          console.log('Registration successful, scope is:', registration.scope)
+          // eslint-disable-next-line no-console
+          console.info('Registration successful, scope is:', registration.scope)
         })
         .catch(error => {
-          console.log('Service worker registration failed, error:', error)
+          // eslint-disable-next-line no-console
+          console.info('Service worker registration failed, error:', error)
         })
-    } */
+    }
   }())
 
   return {
