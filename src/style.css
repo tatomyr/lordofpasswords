@@ -219,7 +219,7 @@ footer {
   background: #000000;
   width: 100%;
   padding: 8px;
-  color: #eeeeee;
+  color: #ebe4c0;
   border-radius: 0 6px 0 0;
 }
 
@@ -227,17 +227,13 @@ footer ul li {
   list-style: none;
   display: inline-block;
   font-size: 0.75rem;
+  padding-right: 4px;
+  border-right: 1px solid #f39e1e;
 }
 
-footer ul li::after {
-  content: '|';
-  color: #7a7a7a;
-  padding-left: 4px;
-  font-weight: 700;
-}
-
-footer ul li:last-child::after {
-  content: '';
+footer ul li:last-child {
+  padding-right: 0;
+  border-right: none;
 }
 
 /* Info page styles */
@@ -267,7 +263,7 @@ p a {
 
 main *::selection {
   background-color: #f39e1e;
-  color: #eeeeee;
+  color: white;
 }
 
 header,
