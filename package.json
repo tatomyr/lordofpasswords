@@ -30,6 +30,8 @@
   "homepage": "https://gitlab.com/tatomyr/pw/blob/master/README.md",
   "dependencies": {},
   "devDependencies": {
+    "autoprefixer": "^9.5.1",
+    "cssnano": "^4.1.10",
     "cypress": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -37,6 +39,7 @@
     "http-server": "^0.11.1",
     "husky": "^1.3.1",
     "ngrok": "^3.1.1",
-    "parcel": "^1.12.3"
+    "parcel": "^1.12.3",
+    "postcss-cli": "^6.1.2"
   }
 }

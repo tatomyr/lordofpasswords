@@ -98,7 +98,6 @@ label {
   display: block;
   color: grey;
   user-select: none;
-  -webkit-user-select: none;
   text-align: left;
 }
 
@@ -289,5 +288,4 @@ main *::selection {
 header,
 footer {
   user-select: none;
-  -webkit-user-select: none;
 }
