@@ -102,8 +102,10 @@ const app = (() => {
     submitButton: document.getElementById('submit'),
     notification: document.getElementById('notification'),
     key: document.getElementById('key'),
+    background: document.getElementById('background'),
   }
 
+  // Handlers
   const savePasswordLength = ({
     target: {
       passwordLength: { value },
@@ -119,6 +121,29 @@ const app = (() => {
     $elements.passwordLength.className = ''
   }
 
+  // Visual effects
+  const switchToShowPasswordMode = () => {
+    $elements.background.className = ''
+    $elements.submitButton.className = 'hidden'
+    $elements.password.className = ''
+  }
+
+  const onSuccessfullCopy = () => {
+    $elements.notification.className = 'visible'
+    setTimeout(() => {
+      $elements.notification.className = ''
+    }, 1000)
+  }
+
+  const switchToCreatePasswordMode = () => {
+    $elements.background.className = 'transparent'
+    $elements.submitButton.className = ''
+    $elements.password.className = 'hidden'
+    $elements.password.value = ''
+    $elements.service.focus()
+  }
+
+  // Exported handlers
   const handleSubmit = e => {
     e.preventDefault()
     $elements.key.className = 'generated'
@@ -126,22 +151,27 @@ const app = (() => {
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
       lengthReset()
-      $elements.submitButton.className = 'hidden'
-      $elements.password.className = ''
+      switchToShowPasswordMode()
       $elements.password.value = password
       $elements.password.select()
       if (document.execCommand('copy')) {
-        $elements.notification.className = 'visible'
+        onSuccessfullCopy()
         setTimeout(() => {
-          $elements.service.focus()
-          $elements.submitButton.className = ''
-          $elements.password.className = 'hidden'
-          $elements.password.value = ''
-          $elements.notification.className = ''
-          $elements.key.className = ''
+          switchToCreatePasswordMode()
         }, 1000)
       }
+      setTimeout(() => {
+        $elements.key.className = ''
+      }, 1000)
     })
+  }
+
+  const copyPassword = () => {
+    $elements.password.select()
+    if (document.execCommand('copy')) {
+      onSuccessfullCopy()
+    }
+    switchToCreatePasswordMode()
   }
 
   // Startup initial settings
@@ -172,5 +202,6 @@ const app = (() => {
 
   return {
     handleSubmit,
+    copyPassword,
   }
 })()

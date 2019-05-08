@@ -39,6 +39,8 @@ header {
   justify-content: center;
   align-items: center;
   border-radius: 0 0 0 6px;
+  position: relative;
+  z-index: 1;
 }
 
 header img {
@@ -182,6 +184,24 @@ input#password {
   border: none;
   color: wheat;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+#background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #2b221c;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0.9;
+}
+
+#background.transparent {
+  opacity: 0;
+  z-index: -1;
 }
 
 #notification {
