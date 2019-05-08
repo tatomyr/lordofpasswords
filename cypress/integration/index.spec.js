@@ -6,7 +6,7 @@ describe('Modern Password Generator', () => {
     cy.visit('/')
   })
   it('passes all the flow', () => {
-    cy.get('#background').should('have.class', '')
+    cy.get('#background').should('have.class', 'transparent')
     cy.get('#password').should('have.class', 'hidden')
     cy.get('#passwordLength')
       .clear()

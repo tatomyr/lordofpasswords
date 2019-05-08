@@ -126,6 +126,10 @@ const app = (() => {
     $elements.background.className = ''
     $elements.submitButton.className = 'hidden'
     $elements.password.className = ''
+    $elements.key.className = 'generated'
+    setTimeout(() => {
+      $elements.key.className = ''
+    }, 1000)
   }
 
   const onSuccessfullCopy = () => {
@@ -146,7 +150,6 @@ const app = (() => {
   // Exported handlers
   const handleSubmit = e => {
     e.preventDefault()
-    $elements.key.className = 'generated'
     savePasswordLength(e)
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
@@ -160,9 +163,6 @@ const app = (() => {
           switchToCreatePasswordMode()
         }, 1000)
       }
-      setTimeout(() => {
-        $elements.key.className = ''
-      }, 1000)
     })
   }
 
