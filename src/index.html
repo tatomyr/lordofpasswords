@@ -114,6 +114,12 @@
         </section>
         <button type="submit" id="submit">Get password</button>
       </form>
+      <div
+        id="background"
+        class="transparent"
+        onclick="app.copyPassword()"
+        title="Click to copy the password to clipboard"
+      ></div>
       <input id="password" readonly class="hidden" />
       <div id="notification" class="hidden">Copied to clipboard</div>
     </main>
