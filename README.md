@@ -25,8 +25,9 @@ Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
 Notice that you have to have your development server started.
 
 Run end-to-end tests in terminal with `$ npm run e2e`.
+This will run separate testing server on port `8081`.
 
 # Deployment
 
 To deploy site on Netlify just push changes to the `master` branch.
-Build command for Netlify: `npm run build` or `mkdir dist && cp -R src/* dist/`.
+Build command for Netlify: `npm run build`.
