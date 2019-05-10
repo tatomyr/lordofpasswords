@@ -1,5 +1,7 @@
 # Password Generator
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/afb7858b-8b7a-44b2-8927-3488748bb000/deploy-status)](https://app.netlify.com/sites/sharp-kilby-69a6e3/deploys)
+
 The app generates a unique hash password for each service using masterpassword.
 We use our own hashing algorithm to ensure the hashed password contains the needed amount of symbols of each type.
 These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
