@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals, no-console */
+
 const dev = location.hostname === 'localhost'
 console.log(`Built date: __BUILD_DATE__, ${dev ? 'development mode' : 'production mode'}`)
 
