@@ -1,0 +1,23 @@
+stages:
+  - lint-js
+  - e2e-test
+
+lint js:
+  image: node:10.15.3
+  stage: lint-js
+  cache:
+    untracked: true
+    policy: pull
+  script:
+    - npm i eslint eslint-config-airbnb-base eslint-plugin-import 
+    - npm run lint
+
+run e2e test:
+  image: cypress/base:10
+  stage: e2e-test
+  cache:
+    untracked: true
+    policy: pull
+  script:
+    - npm i cypress 
+    - cd src && npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
