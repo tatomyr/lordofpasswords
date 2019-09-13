@@ -106,24 +106,39 @@ label:focus-within {
   transition: color 0.4s ease-in-out;
 }
 
-input {
-  text-align: right;
-  width: 100%;
-  padding: 6px;
-  color: white;
-  background-color: transparent;
-  font-family: monospace, 'Courier New', Courier;
+input,
+button {
   font-size: 1rem;
+  padding: 6px;
+  background-color: transparent;
   outline: none;
   border: none;
-  border-top: 1px solid #f39e1e;
   border-radius: 0 6px 0 0;
   transition: border-radius 0.7s ease-in-out;
 }
 
-input:focus {
+input {
+  text-align: right;
+  width: 100%;
+  color: white;
+  font-family: monospace, 'Courier New', Courier;
+  border-top: 1px solid #f39e1e;
+}
+
+button {
+  color: wheat;
+  cursor: pointer;
+  border: 1px solid #f39e1e;
+  width: 300px;
+  max-width: 100%;
+}
+
+input:focus,
+button:focus,
+button:hover {
   font-weight: bold;
   background-color: #f39e1e;
+  color: white;
   border-radius: 0 0 0 6px;
 }
 
@@ -134,17 +149,13 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
-}
-
-input[type='checkbox'] {
-  width: initial;
-  margin: 0 8px 0 0;
+  max-width: 3rem;
 }
 
 section#options {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 @media screen and (max-width: 380px) {
@@ -153,32 +164,19 @@ section#options {
   }
 }
 
-section#options .form-group {
-  width: 100%;
+section#options input {
+  width: initial;
+  margin-left: 8px;
 }
 
-label#special {
+section#options label {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 6px 0 6px 6px;
-}
-
-button {
-  padding: 6px;
-  font-size: 1rem;
-  background-color: transparent;
-  border: none;
-  color: wheat;
-  cursor: pointer;
-  outline: none;
 }
 
 input#password {
   text-align: center;
-  padding: 6px;
   font-family: Helvetica, sans-serif, Arial;
-  font-size: 1rem;
   background-color: transparent;
   border: none;
   color: wheat;
