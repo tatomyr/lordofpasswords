@@ -1,6 +1,6 @@
 {
-  "name": "Password Generator",
-  "short_name": "TODO: Passwordity, Livepassword, Uniqpassword?",
+  "name": "Lord of Passwords",
+  "short_name": "LordOfPass",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
