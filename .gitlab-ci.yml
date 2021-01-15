@@ -2,7 +2,7 @@ stages:
   - lint-js
   - e2e-test
 
-image: cypress/base:10
+image: cypress/base:14
 
 lint js:
   stage: lint-js
@@ -12,6 +12,9 @@ lint js:
   script:
     - npm i eslint eslint-config-airbnb-base eslint-plugin-import
     - npm run lint
+  only:
+    - merge_requests
+
 
 run e2e test:
   stage: e2e-test
@@ -21,3 +24,6 @@ run e2e test:
   script:
     - npm i cypress
     - cd src && npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
+  only:
+    - merge_requests
+
