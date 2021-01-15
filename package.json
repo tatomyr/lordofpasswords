@@ -1,10 +1,9 @@
 {
-  "name": "pw",
+  "name": "lordofpasswords",
   "version": "0.3.0",
   "description": "Password Generator",
   "main": "dist/index.html",
   "scripts": {
-    "parcel": "parcel src/index.html --port 8080",
     "start": "cd src && static-server -p 8080",
     "ngrok": "ngrok http 8080",
     "lint": "eslint ./src/",
@@ -19,16 +18,8 @@
       "pre-commit": "npm run lint && npm run e2e"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.com/tatomyr/pw.git"
-  },
   "author": "tatomyr",
   "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/tatomyr/pw/issues"
-  },
-  "homepage": "https://gitlab.com/tatomyr/pw/blob/master/README.md",
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^9.5.1",
@@ -40,7 +31,6 @@
     "eslint-plugin-import": "^2.17.2",
     "husky": "^2.2.0",
     "ngrok": "^3.1.1",
-    "parcel": "^1.12.3",
     "postcss-cli": "^6.1.2",
     "static-server": "^2.2.1"
   }

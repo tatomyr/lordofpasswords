@@ -12,7 +12,7 @@ describe('Info Page', () => {
   })
   it('anchors to links', () => {
     cy.get('main section#why-use a')
-      .contains('Why use Password Generator?')
+      .contains('Why use Lord of Passwords?')
       .click()
     cy.location('hash').should('eq', '#why-use')
   })

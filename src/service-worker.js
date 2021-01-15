@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals, no-console */
 
 const dev = location.hostname === 'localhost'
-console.log(`Built date: __BUILD_DATE__, ${dev ? 'development mode' : 'production mode'}`)
+console.log(`Build date: __BUILD_DATE__, ${dev ? 'development mode' : 'production mode'}`)
 
 const CASHE_NAME = 'v3'
 const FILES_TO_CASHE = [
@@ -37,7 +37,6 @@ if (dev) {
     console.log('[ServiceWorker] Activate')
     e.waitUntil(
       caches.keys().then(keyList => Promise.all(
-        // FIXME: linter errors
         // eslint-disable-next-line array-callback-return, consistent-return
         keyList.map(key => {
           if (key !== CASHE_NAME) {
