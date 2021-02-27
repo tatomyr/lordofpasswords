@@ -2,16 +2,16 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/afb7858b-8b7a-44b2-8927-3488748bb000/deploy-status)](https://app.netlify.com/sites/lordofpasswords/deploys)
 
-> **One password to rule them all…**
+> **One password to rule them all**
 
 The app generates a unique hash password for each service using masterpassword.
 We use our own hashing algorithm to ensure the hashed password contains the needed amount of symbols of each type.
 These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
 If the user chose using special symbols, the password should also contain at least 1 special character.
 
-See the [live page](https://lordofpasswords.netlify.com/).
+See the [live page](https://lordofpasswords.netlify.app/).
 
-See old versions [here](https://pw.netlify.com).
+See old versions [here](https://pw.netlify.app).
 
 ## Development
 
