@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
 import { getRandom, countOf } from '../../test-utils/helpers'
 
-describe('Modern Password Generator', () => {
+describe('Modern Password Generator', async () => {
   beforeEach(() => {
     cy.visit('/')
   })
   it('passes all the flow', () => {
-    cy.get('#background').should('have.class', 'transparent')
     cy.get('#password').should('have.class', 'hidden')
     cy.get('#passwordLength')
       .clear()
@@ -14,20 +13,10 @@ describe('Modern Password Generator', () => {
     cy.get('#service').type('service')
     cy.get('#masterpassword').type('salt')
     cy.get('#special').click()
-    cy.get('#submit')
-      .should('have.class', '')
-      .click()
-      .should('have.class', 'hidden')
-    cy.get('#password')
-      .should('have.class', '')
-      .should('have.value', '6Bt$70')
-    // We have to click to copy and proceed because it stucks due to known cypress issue:
-    // https://github.com/cypress-io/cypress/issues/2851
-    cy.get('#background')
-      .should('have.class', '')
-      .click('left')
-      .should('have.class', 'transparent')
-    cy.get('#submit').should('have.class', '')
+    cy.get('#submit').click()
+    cy.on('window:alert', message => {
+      expect(message).to.equal('Could not copy the password. Please do it manually: 6Bt$70')
+    })
     cy.get('#password')
       .should('have.class', 'hidden')
       .should('have.value', '')
@@ -47,7 +36,9 @@ describe('Modern Password Generator', () => {
     cy.get('#masterpassword').type('*D6hR')
     cy.get('#special').click()
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', '8u@0CK')
+    cy.on('window:alert', message => {
+      expect(message).to.equal('Could not copy the password. Please do it manually: 8u@0CK')
+    })
   })
   it('should contain required number of symbols of each type', () => {
     const service = getRandom.string(1, 32)
@@ -60,13 +51,14 @@ describe('Modern Password Generator', () => {
       .type(passwordLength)
     cy.get('#special').click()
     cy.get('#submit').click()
-    cy.get('#password').should(([{ value }]) => {
-      expect(value).to.have.length(passwordLength)
-      const countForValue = countOf(value)
-      expect(countForValue(/[A-Z]/g)).to.gte(1)
-      expect(countForValue(/[a-z]/g)).to.gte(1)
-      expect(countForValue(/[0-9]/g)).to.gte(2)
-      expect(countForValue(/[!$\-+,.#@]/g)).to.gte(1)
+    cy.on('window:alert', message => {
+      const [password] = message.split(' ').reverse()
+      expect(password).to.have.length(passwordLength)
+      const countForPassword = countOf(password)
+      expect(countForPassword(/[A-Z]/g)).to.gte(1)
+      expect(countForPassword(/[a-z]/g)).to.gte(1)
+      expect(countForPassword(/[0-9]/g)).to.gte(2)
+      expect(countForPassword(/[!$\-+,.#@]/g)).to.gte(1)
     })
   })
   it('should contain required number of symbols of each type for minimal password length', () => {
@@ -85,16 +77,17 @@ describe('Modern Password Generator', () => {
       })
     cy.get('#special').click()
     cy.get('#submit').click()
-    cy.get('#password').should(([{ value }]) => {
-      expect(value).to.have.length(passwordLength)
-      const countForValue = countOf(value)
-      expect(countForValue(/[A-Z]/g)).to.gte(1)
-      expect(countForValue(/[a-z]/g)).to.gte(1)
-      expect(countForValue(/[0-9]/g)).to.gte(2)
-      expect(countForValue(/[!$\-+,.#@]/g)).to.gte(1)
+    cy.on('window:alert', message => {
+      const [password] = message.split(' ').reverse()
+      expect(password).to.have.length(passwordLength)
+      const countForPassword = countOf(password)
+      expect(countForPassword(/[A-Z]/g)).to.gte(1)
+      expect(countForPassword(/[a-z]/g)).to.gte(1)
+      expect(countForPassword(/[0-9]/g)).to.gte(2)
+      expect(countForPassword(/[!$\-+,.#@]/g)).to.gte(1)
     })
   })
-  it('should not have collisions', () => {
+  it('should not have collisions (ideally)', () => {
     let service = getRandom.string(1, 32)
     const masterpassword = getRandom.string(1, 32)
     const passwordLength = getRandom.int(6, 64)
@@ -104,18 +97,15 @@ describe('Modern Password Generator', () => {
       .clear()
       .type(passwordLength)
     cy.get('#submit').click()
-    let password1
-    cy.get('#password').should(([{ value }]) => {
-      password1 = value
-    })
-    cy.get('#background').click('right')
+    const passwords = []
     service = getRandom.string(1, 32)
     cy.get('#service').type(service)
     cy.get('#masterpassword').type(masterpassword)
     cy.get('#submit').click()
-    cy.get('#password').should(([{ value }]) => {
-      expect(value).to.have.length(passwordLength)
-      expect(value).to.not.equal(password1)
+    cy.on('window:alert', message => {
+      const [password] = message.split(' ').reverse()
+      passwords.push(password)
+      expect(passwords[0]).to.not.equal(passwords[1])
     })
   })
   it('should redirect to the Info Page', () => {

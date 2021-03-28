@@ -107,26 +107,23 @@
                 max="64"
                 placeholder="#"
                 required
-                class="hide-text"
               />
             </label>
           </section>
         </section>
-        <button type="submit" id="submit">Get password</button>
+        <section class="form-group">
+          <button type="submit" id="submit">
+            Copy password to clipboard
+          </button>
+        </section>
       </form>
-      <div
-        id="background"
-        class="transparent"
-        onclick="app.copyPassword()"
-        title="Click to copy the password to clipboard"
-      ></div>
       <input id="password" readonly class="hidden" />
-      <div id="notification" class="hidden">Copied to clipboard</div>
+      <div id="notification">Copied to clipboard</div>
     </main>
     <footer>
       <ul>
         <li><a href="/info.html">Find out more</a></li>
-        <li><a href="https://gitlab.com/tatomyr/pw">Gitlab</a></li>
+        <li><a href="https://gitlab.com/tatomyr/lordofpasswords">Gitlab</a></li>
       </ul>
     </footer>
     <script src="/app.js"></script>

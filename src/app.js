@@ -47,7 +47,10 @@ const app = (() => {
 
   // Rehashing password to match needed conditions
   const getRecurrPw = ({
-    service, salt, pwLength, special,
+    service = '',
+    salt = '',
+    pwLength = 0,
+    special = false,
   }, callback) => {
     const password = pw3(service, salt, pwLength, special)
     let upperCasedCount = 0
@@ -61,25 +64,23 @@ const app = (() => {
       lowerCasedCount += testIn(LOWERCASED)
       specialsCount += testIn(SPECIALS)
     }
-    // FIXME: delete log
-    console.log(password, ':::', upperCasedCount, lowerCasedCount, numbersCount, specialsCount)
-    if (
-      numbersCount >= 2
+
+    const goodPassword = numbersCount >= 2
       && upperCasedCount >= 1
       && lowerCasedCount >= 1
       && (!special || specialsCount >= 1)
-    ) {
-      return callback(password)
-    }
-    return getRecurrPw(
-      {
-        service: password,
-        salt,
-        pwLength,
-        special,
-      },
-      callback
-    )
+
+    return goodPassword
+      ? callback(password)
+      : getRecurrPw(
+        {
+          service: password,
+          salt,
+          pwLength,
+          special,
+        },
+        callback
+      )
   }
 
   const inputAdapter = ({
@@ -102,10 +103,35 @@ const app = (() => {
     submitButton: document.getElementById('submit'),
     notification: document.getElementById('notification'),
     key: document.getElementById('key'),
-    background: document.getElementById('background'),
+  }
+
+  // Visual effects
+  const onSuccessfullCopy = () => {
+    $elements.notification.className = 'visible'
+    $elements.key.className = 'generated'
+
+    setTimeout(() => {
+      $elements.notification.className = ''
+      $elements.key.className = ''
+    }, 1000)
   }
 
   // Handlers
+  const copyPassword = password => {
+    $elements.password.className = ''
+    $elements.password.value = password
+    $elements.password.select()
+    if (document.execCommand('copy')) {
+      onSuccessfullCopy()
+    } else {
+      // eslint-disable-next-line no-alert
+      alert(`Could not copy the password. Please do it manually: ${password}`)
+    }
+    $elements.password.className = 'hidden'
+    $elements.password.value = ''
+    $elements.service.focus()
+  }
+
   const savePasswordLength = ({
     target: {
       passwordLength: { value },
@@ -114,77 +140,29 @@ const app = (() => {
     localStorage.setItem('passwordLength', value)
   }
 
-  const lengthReset = () => {
+  const resetPasswordLength = () => {
     if (+localStorage.passwordLength) {
       $elements.passwordLength.value = +localStorage.passwordLength
     }
     $elements.passwordLength.className = ''
   }
 
-  // Visual effects
-  const switchToShowPasswordMode = () => {
-    $elements.background.className = ''
-    $elements.submitButton.className = 'hidden'
-    $elements.password.className = ''
-    $elements.key.className = 'generated'
-    setTimeout(() => {
-      $elements.key.className = ''
-    }, 1000)
-  }
-
-  const onSuccessfullCopy = () => {
-    $elements.notification.className = 'visible'
-    setTimeout(() => {
-      $elements.notification.className = ''
-    }, 1000)
-  }
-
-  const switchToCreatePasswordMode = () => {
-    $elements.background.className = 'transparent'
-    $elements.submitButton.className = ''
-    $elements.password.className = 'hidden'
-    $elements.password.value = ''
-    $elements.service.focus()
-  }
-
-  // Exported handlers
+  // Exported methods
   const handleSubmit = e => {
     e.preventDefault()
     savePasswordLength(e)
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
-      lengthReset()
-      switchToShowPasswordMode()
-      $elements.password.value = password
-      $elements.password.select()
-      if (document.execCommand('copy')) {
-        onSuccessfullCopy()
-        setTimeout(() => {
-          switchToCreatePasswordMode()
-        }, 1000)
-      }
+      resetPasswordLength()
+      copyPassword(password)
     })
-  }
-
-  const copyPassword = () => {
-    $elements.password.select()
-    if (document.execCommand('copy')) {
-      onSuccessfullCopy()
-    }
-    switchToCreatePasswordMode()
   }
 
   // Startup initial settings
   // eslint-disable-next-line semi-style
   ;(function STARTUP() {
-    lengthReset()
+    resetPasswordLength()
     $elements.service.focus()
-    setTimeout(() => {
-      // Make notification element displayable
-      // This is needed for some browsers that cashe the visible state…
-      // …so we have to hide the notification element completely a first time
-      $elements.notification.className = ''
-    })
     // Registering service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -202,6 +180,5 @@ const app = (() => {
 
   return {
     handleSubmit,
-    copyPassword,
   }
 })()

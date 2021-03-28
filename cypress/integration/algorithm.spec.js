@@ -14,7 +14,10 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#service').type('service')
     cy.get('#masterpassword').type('salt')
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', '9Kb6vH')
+    cy.on('window:alert', message => {
+      const [pw] = message.split(' ').reverse()
+      expect(pw).to.equal('9Kb6vH')
+    })
   })
   it('generating password of length 6 with the standard charset', () => {
     const data = ['service', 'salt', 6]
@@ -27,7 +30,10 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#service').type(data[0])
     cy.get('#masterpassword').type(data[1])
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', password)
+    cy.on('window:alert', message => {
+      const [pw] = message.split(' ').reverse()
+      expect(pw).to.equal(password)
+    })
   })
   it('generating password of length 64 with the standard charset', () => {
     const data = ['service', 'salt', 64]
@@ -40,7 +46,10 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#service').type(data[0])
     cy.get('#masterpassword').type(data[1])
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', password)
+    cy.on('window:alert', message => {
+      const [pw] = message.split(' ').reverse()
+      expect(pw).to.equal(password)
+    })
   })
   it('generating password of big random length with the standard charset', () => {
     const data = [
@@ -57,7 +66,10 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#service').type(data[0])
     cy.get('#masterpassword').type(data[1])
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', password)
+    cy.on('window:alert', message => {
+      const [pw] = message.split(' ').reverse()
+      expect(pw).to.equal(password)
+    })
   })
   it('generating password of moderate random length with the standard charset', () => {
     const data = [
@@ -74,6 +86,9 @@ describe('Compatibility with the Classical Password Generator', () => {
     cy.get('#service').type(data[0])
     cy.get('#masterpassword').type(data[1])
     cy.get('#submit').click()
-    cy.get('#password').should('have.value', password)
+    cy.on('window:alert', message => {
+      const [pw] = message.split(' ').reverse()
+      expect(pw).to.equal(password)
+    })
   })
 })

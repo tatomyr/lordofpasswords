@@ -3,10 +3,16 @@ describe('Info Page', () => {
   beforeEach(() => {
     cy.visit('/info.html')
   })
-  it('contains link to home', () => {
+  it('contains link to home in footer', () => {
     cy.get('footer ul li a')
       .first()
       .contains('Home')
+      .click()
+    cy.location('pathname').should('eq', '/')
+  })
+  it('contains link to home in header', () => {
+    cy.get('header h1 a')
+      .contains('Lord of Passwords')
       .click()
     cy.location('pathname').should('eq', '/')
   })

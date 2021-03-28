@@ -37,13 +37,13 @@ body {
 
 /* Header styles */
 header {
-  background: wheat;
-  padding: 12px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: wheat;
+  padding: 12px;
   border-radius: 0 0 0 6px;
-  position: relative;
   z-index: 1;
 }
 
@@ -54,7 +54,6 @@ header img {
 }
 
 header:hover img {
-  width: 2.5rem;
   transform: rotate(-20deg);
   transition: transform 0.4s;
 }
@@ -186,32 +185,14 @@ input#password {
   color: wheat;
   cursor: pointer;
   position: relative;
-  z-index: 1;
-}
-
-#background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #2b221c;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 0.9;
-}
-
-#background.transparent {
-  opacity: 0;
-  z-index: -1;
 }
 
 #notification {
   background-color: #17b417;
   color: white;
   border-radius: 6px;
-  padding: 6px;
+  padding: 6px 12px;
   font-size: 0.8rem;
-  margin: 8px 0;
   display: inline-block;
   opacity: 0;
   transform: translateY(50px);
@@ -219,10 +200,6 @@ input#password {
 }
 
 /* Common styles */
-.hide-text {
-  color: transparent;
-}
-
 .hidden {
   display: none !important;
 }
