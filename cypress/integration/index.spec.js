@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { getRandom, countOf } from '../../test-utils/helpers'
 
-describe('Modern Password Generator', async () => {
+describe('Modern Password Generator', () => {
   beforeEach(() => {
     cy.visit('/')
   })
@@ -88,6 +88,7 @@ describe('Modern Password Generator', async () => {
     })
   })
   it('should not have collisions (ideally)', () => {
+    const passwords = []
     let service = getRandom.string(1, 32)
     const masterpassword = getRandom.string(1, 32)
     const passwordLength = getRandom.int(6, 64)
@@ -97,7 +98,6 @@ describe('Modern Password Generator', async () => {
       .clear()
       .type(passwordLength)
     cy.get('#submit').click()
-    const passwords = []
     service = getRandom.string(1, 32)
     cy.get('#service').type(service)
     cy.get('#masterpassword').type(masterpassword)
