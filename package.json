@@ -1,11 +1,11 @@
 {
   "name": "lordofpasswords",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Password Generator",
   "main": "dist/index.html",
   "scripts": {
     "start": "cd src && static-server -p 8080",
-    "ngrok": "ngrok http 8080",
+    "ngrok": "npx ngrok http 8080",
     "lint": "eslint ./src/",
     "e2e": "bash bin/test.sh",
     "cypress": "cypress open --config baseUrl=http://localhost:8080",
@@ -23,7 +23,6 @@
     "eslint": "^8.13.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "ngrok": "^4.3.1",
     "postcss-cli": "^9.1.0",
     "static-server": "^2.2.1"
   }

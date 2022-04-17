@@ -4,4 +4,5 @@ test-utils/cypress-examples
 cypress/screenshots/
 cypress/videos/
 dist/
+public/
 .DS_Store

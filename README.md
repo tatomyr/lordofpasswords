@@ -1,7 +1,5 @@
 # Lord of Passwords
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/afb7858b-8b7a-44b2-8927-3488748bb000/deploy-status)](https://app.netlify.com/sites/lordofpasswords/deploys)
-
 > **One password to rule them all**
 
 The app generates a unique hash password for each service using masterpassword.
@@ -9,7 +7,7 @@ We use our own hashing algorithm to ensure the hashed password contains the need
 These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
 If the user chose using special symbols, the password should also contain at least 1 special character.
 
-See the [live page](https://lordofpasswords.netlify.app/).
+See the [live page](https://tatomyr.github.io/lordofpasswords/).
 
 See old versions [here](https://pw.netlify.app).
 
@@ -29,7 +27,7 @@ Notice that you have to have your development server started.
 Run end-to-end tests in terminal with `$ npm run e2e`.
 This will run separate testing server on port `8081`.
 
-## Deployment
+## Deployment on Netlify (deprecated)
 
 To deploy site on Netlify just push changes to the `master` branch.
 Build command for Netlify: `npm run build`.

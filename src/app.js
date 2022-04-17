@@ -166,7 +166,7 @@ const app = (() => {
     // Registering service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/service-worker.js')
+        .register('./service-worker.js')
         .then(registration => {
           // eslint-disable-next-line no-console
           console.info('Registration successful, scope is:', registration.scope)
