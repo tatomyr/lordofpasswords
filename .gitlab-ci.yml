@@ -26,4 +26,3 @@ run e2e test:
     - cd src && npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
   only:
     - merge_requests
-
