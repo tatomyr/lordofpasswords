@@ -1,0 +1,39 @@
+name: Check the code
+
+on:
+  pull_request
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node.js for use with actions
+      uses: actions/setup-node@v2
+      with:
+        version: 16.x
+
+    - name: Checkout branch
+      uses: actions/checkout@v2
+
+    - name: Clean install dependencies
+      run: npm ci
+
+    - name: Lint
+      run: npm run lint
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node.js for use with actions
+      uses: actions/setup-node@v2
+      with:
+        version: 16.x
+
+    - name: Checkout branch
+      uses: actions/checkout@v2
+
+    - name: Clean install dependencies
+      run: npm ci
+
+    - name: E2E tests
+      run: cd src && npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081

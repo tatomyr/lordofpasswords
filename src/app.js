@@ -22,24 +22,14 @@ const app = (() => {
       salt += pwChar(salt.length + service.length)
     }
     let sum = 0
-    /* // Mobile IE doesn't support this
-          for (let item of service) {
-            sum += item.charCodeAt();
-          }
-          for (let item of salt) {
-            sum += item.charCodeAt();
-          }
-          /* */
     for (let j = 0; j < service.length; j++) {
       sum += service.charCodeAt(j)
     }
     for (let k = 0; k < salt.length; k++) {
       sum += salt.charCodeAt(k)
     }
-    /* */
     const jOffset = sum % service.length
     const kOffset = sum % (salt.length + 1)
-    // I don't know why, but Array(pwLength).fill(0) doesn't create an array properly
     const pwArr = []
     for (let i = 0; !(i >= pwLength && i >= service.length && i >= salt.length + 1); i++) {
       const innerSalt = salt + pwChar(i)
@@ -57,7 +47,10 @@ const app = (() => {
 
   // Rehashing password to match needed conditions
   const getRecurrPw = ({
-    service, salt, pwLength, special,
+    service = '',
+    salt = '',
+    pwLength = 0,
+    special = false,
   }, callback) => {
     const password = pw3(service, salt, pwLength, special)
     let upperCasedCount = 0
@@ -71,43 +64,40 @@ const app = (() => {
       lowerCasedCount += testIn(LOWERCASED)
       specialsCount += testIn(SPECIALS)
     }
-    // FIXME: delete log
-    console.log(password, ':::', upperCasedCount, lowerCasedCount, numbersCount, specialsCount)
-    if (
-      numbersCount >= 2
+
+    const goodPassword = numbersCount >= 2
       && upperCasedCount >= 1
       && lowerCasedCount >= 1
       && (!special || specialsCount >= 1)
-    ) {
-      // this.setState({ displaySpinner: 'none' })
-      return callback(password)
-    }
-    return getRecurrPw(
-      {
-        service: password,
-        salt,
-        pwLength,
-        special,
-      },
-      callback
-    )
+
+    return goodPassword
+      ? callback(password)
+      : getRecurrPw(
+        {
+          service: password,
+          salt,
+          pwLength,
+          special,
+        },
+        callback
+      )
   }
 
   const inputAdapter = ({
-    length: { value: length },
+    passwordLength: { value: passwordLength },
     service: { value: service },
     masterpassword: { value: masterpassword },
     special: { checked: special },
   }) => ({
-    pwLength: +length,
+    pwLength: +passwordLength,
     service,
     salt: masterpassword,
     special,
   })
 
   // Define elements selectors
-  const $element = {
-    length: document.getElementById('length'),
+  const $elements = {
+    passwordLength: document.getElementById('passwordLength'),
     service: document.getElementById('service'),
     password: document.getElementById('password'),
     submitButton: document.getElementById('submit'),
@@ -115,57 +105,77 @@ const app = (() => {
     key: document.getElementById('key'),
   }
 
+  // Visual effects
+  const onSuccessfullCopy = () => {
+    $elements.notification.className = 'visible'
+    $elements.key.className = 'generated'
+
+    setTimeout(() => {
+      $elements.notification.className = ''
+      $elements.key.className = ''
+    }, 1000)
+  }
+
+  // Handlers
+  const copyPassword = password => {
+    $elements.password.className = ''
+    $elements.password.value = password
+    $elements.password.select()
+    if (document.execCommand('copy')) {
+      onSuccessfullCopy()
+    } else {
+      // eslint-disable-next-line no-alert
+      alert(`Could not copy the password. Please do it manually: ${password}`)
+    }
+    $elements.password.className = 'hidden'
+    $elements.password.value = ''
+    $elements.service.focus()
+  }
+
   const savePasswordLength = ({
     target: {
-      length: { value },
+      passwordLength: { value },
     },
   }) => {
     localStorage.setItem('passwordLength', value)
   }
 
-  const lengthReset = () => {
+  const resetPasswordLength = () => {
     if (+localStorage.passwordLength) {
-      $element.length.value = +localStorage.passwordLength
+      $elements.passwordLength.value = +localStorage.passwordLength
     }
-    $element.length.className = ''
+    $elements.passwordLength.className = ''
   }
 
+  // Exported methods
   const handleSubmit = e => {
     e.preventDefault()
-    $element.key.className = 'generated'
     savePasswordLength(e)
     getRecurrPw(inputAdapter(e.target), password => {
       e.target.reset()
-      lengthReset()
-      $element.submitButton.className = 'hidden'
-      $element.password.className = ''
-      $element.password.value = password
-      $element.password.select()
-      if (document.execCommand('copy')) {
-        $element.notification.className = 'visible'
-        setTimeout(() => {
-          $element.service.focus()
-          $element.submitButton.className = ''
-          $element.password.className = 'hidden'
-          $element.password.value = ''
-          $element.notification.className = ''
-          $element.key.className = ''
-        }, 1000)
-      }
+      resetPasswordLength()
+      copyPassword(password)
     })
   }
 
   // Startup initial settings
   // eslint-disable-next-line semi-style
   ;(function STARTUP() {
-    lengthReset()
-    $element.service.focus()
-    setTimeout(() => {
-      // Make notification element displayable
-      // This is needed for some browsers that cashe the visible state…
-      // …so we have to hide the notification element completely a first time
-      $element.notification.className = ''
-    })
+    resetPasswordLength()
+    $elements.service.focus()
+    // Registering service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./service-worker.js')
+        .then(registration => {
+          // eslint-disable-next-line no-console
+          console.info('Registration successful, scope is:', registration.scope)
+        })
+        .catch(error => {
+          // eslint-disable-next-line no-console
+          console.info('Service worker registration failed, error:', error)
+        })
+    }
   }())
 
   return {
