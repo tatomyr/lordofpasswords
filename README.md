@@ -11,6 +11,9 @@ See the [live page](https://tatomyr.github.io/lordofpasswords/).
 
 See old versions [here](https://pw.netlify.app).
 
+![check](https://github.com/tatomyr/lordofpasswords/actions/workflows/check.yaml/badge.svg)
+![deploy](https://github.com/tatomyr/lordofpasswords/actions/workflows/deploy.yaml/badge.svg)
+
 ## Development
 
 To start the project on `localhost:8080` type `$ npm start` in Terminal.
