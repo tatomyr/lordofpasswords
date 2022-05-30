@@ -2,35 +2,60 @@
 
 > **One password to rule them all**
 
-The app generates a unique hash password for each service using masterpassword.
+The app generates a unique hashed password for each **service** using **masterpassword**.
 We use our own hashing algorithm to ensure the hashed password contains the needed amount of symbols of each type.
 These are at least 2 numbers, 1 Latin character in upper case and 1 in lower case.
 If the user chose using special symbols, the password should also contain at least 1 special character.
 
-See the [live page](https://tatomyr.github.io/lordofpasswords/).
-
-See old versions [here](https://pw.netlify.app).
+See the [live page →](https://tatomyr.github.io/lordofpasswords/)
 
 ![check](https://github.com/tatomyr/lordofpasswords/actions/workflows/check.yaml/badge.svg)
 ![deploy](https://github.com/tatomyr/lordofpasswords/actions/workflows/deploy.yaml/badge.svg)
 
-## Development
+---
 
-To start the project on `localhost:8080` type `$ npm start` in Terminal.
+## Why use Lord of Passwords?
 
-All files are available to edit and deploy inside `src/` folder.
+It is considered a good practice to have a different password for each site or another service. 
+And it's also desirable to have passwords that are hard to guess but easy to remember.
 
-We don't minify nor optimize the code by intent to show users the actual code that run in the application.
+![remembering an old password](./old-password.jpeg)
 
-## Testing
+That's where the **Lord of Passwords** comes in handy. You should only
+remember your masterpassword. Also, you have to specify a memorable
+name for a site or service (for this site it probably could be **lordofpasswords**). 
+Then the app does the rest - mixes them both together, 
+and ensures that you'll get the proper password format 
+(e. g. with the required number of different types of characters).
 
-Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
-Notice that you have to have your development server started.
+You can access the Lord of Passwords on a desktop, on a tablet or 
+on your mobile. You can even kind of install it!
 
-Run end-to-end tests in terminal with `$ npm run e2e`.
-This will run separate testing server on port `8081`.
+Then if you know which service you're trying to get access to, and
+remember your single masterpassword, you can always have your key
+using Lord of Passwords.
 
-## Deployment on Netlify (deprecated)
+## Is it safe to use Lord of Passwords?
 
-To deploy site on Netlify just push changes to the `master` branch.
-Build command for Netlify: `npm run build`.
+The short answer is yes, it is. And that's why.
+
+Using this application is completely anonymous. It doesn't track your
+identity, so it doesn't know which user has issued the password.
+
+Moreover, it neither sends your data over the internet nor stores it,
+except for password length. It is being stored locally for the sake of
+the users' convenience, so you don't need to enter the number each time.
+You can go completely offline and your app will continue working
+because we don't rely on any kind of database. So no one could crack
+your sensitive data, because it isn't stored anywhere but inside your
+head.
+
+To ensure that someone else cannot access your data, we don't depend on
+any third-party library that may change over time and possibly bring
+some malicious instructions.
+
+Also, we prevent any calls over the internet from this application. 
+So even if some malicious extension did read your personal data, they wouldn't have sent them anywhere.
+
+We don't minify nor uglify the app code so you can check it out
+using developer tools. All the application's code is also available on Github.

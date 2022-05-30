@@ -7,7 +7,6 @@ const CASHE_NAME = 'v3'
 const FILES_TO_CASHE = [
   './',
   './index.html',
-  './info.html',
   './app.js',
   './manifest.json',
   './style.css',
