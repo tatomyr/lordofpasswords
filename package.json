@@ -1,12 +1,11 @@
 {
   "name": "lordofpasswords",
-  "version": "0.5.0",
+  "version": "1.0.0-alpha",
   "description": "Password Generator",
   "main": "dist/index.html",
   "scripts": {
-    "start": "cd src && static-server -p 8080",
-    "ngrok": "npx ngrok http 8080",
-    "lint": "eslint ./src/",
+    "start": "npx static-server -p 8080",
+    "lint": "eslint ./app.js",
     "e2e": "bash bin/test.sh",
     "cypress": "cypress open --config baseUrl=http://localhost:8080",
     "build": "bash bin/build.sh",

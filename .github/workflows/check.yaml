@@ -1,7 +1,9 @@
 name: Check the code
 
 on:
-  pull_request
+  pull_request:
+    branches:
+    - master
 
 jobs:
   lint:
@@ -36,4 +38,4 @@ jobs:
       run: npm ci
 
     - name: E2E tests
-      run: cd src && npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
+      run: npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
