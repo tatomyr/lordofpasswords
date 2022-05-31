@@ -19,7 +19,7 @@ See the [live page →](https://tatomyr.github.io/lordofpasswords/)
 It is considered good practice to have a different password for each site or another service. 
 And it's also desirable to have passwords that are hard to guess but easy to remember.
 
-![remembering an old password](./old-password.jpeg)
+![Remembering an old password](https://i.kym-cdn.com/photos/images/original/001/634/432/fb1.jpg)
 
 That's where the **Lord of Passwords** comes in handy. 
 You only need to remember your masterpassword. 
