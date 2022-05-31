@@ -139,7 +139,6 @@ button {
 input:focus,
 button:focus,
 button:hover {
-  font-weight: bold;
   background-color: #f39e1e;
   color: white;
   border-radius: 0 0 0 6px;

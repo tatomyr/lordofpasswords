@@ -108,10 +108,11 @@ describe('Modern Password Generator', () => {
       expect(passwords[0]).to.not.equal(passwords[1])
     })
   })
-  it('should redirect to the Info Page', () => {
-    cy.get('footer ul li a')
-      .first()
-      .click()
-    cy.location('pathname').should('eq', '/info.html')
+  it('should contain a link to the repository with documentation', () => {
+    cy.contains('a', 'info on Github').should(
+      'have.attr',
+      'href',
+      'https://github.com/tatomyr/lordofpasswords'
+    )
   })
 })
