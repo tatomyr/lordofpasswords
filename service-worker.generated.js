@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals, no-console */
 
 const dev = location.hostname === 'localhost'
-console.log(`Build date: Wed  1 Jun 2022 10:24:33 CEST, ${dev ? 'development mode' : 'production mode'}`)
+console.log(`Build date: Wed  1 Jun 2022 10:27:40 CEST, ${dev ? 'development mode' : 'production mode'}`)
 
 const CASHE_NAME = 'v4'
 const FILES_TO_CASHE = [
