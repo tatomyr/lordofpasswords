@@ -28,4 +28,5 @@ module.exports = {
     'no-mixed-operators': 'off',
     'no-plusplus': 'off',
   },
+  ignorePatterns: ['cypress/plugins/index.js'],
 }
