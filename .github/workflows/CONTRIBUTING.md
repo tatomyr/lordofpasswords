@@ -14,3 +14,11 @@ Notice that you have to have your development server started.
 
 Run end-to-end tests in the terminal with `$ npm run e2e`.
 It will run a separate testing server on port `8081`.
+
+## Deployment
+
+The content of the `main` branch will be served via `github-pages`.
+Please create a new branch out of `main`, put your changes there and create a merge request to the `main` branch.
+
+You have to sign off every new release with `npm run build` command before committing the changes.
+This will update `.service-worker.js` file, what ensures cache invalidation.

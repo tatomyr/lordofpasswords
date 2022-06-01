@@ -1,11 +1,11 @@
 {
   "name": "lordofpasswords",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "description": "Password Generator",
   "main": "dist/index.html",
   "scripts": {
     "start": "npx static-server -p 8080",
-    "lint": "eslint ./app.js",
+    "lint": "eslint .",
     "e2e": "bash bin/test.sh",
     "cypress": "cypress open --config baseUrl=http://localhost:8080",
     "build": "bash bin/build.sh",
@@ -15,14 +15,11 @@
   "author": "tatomyr",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.4.4",
     "chalk": "^5.0.1",
-    "cssnano": "^5.1.7",
     "cypress": "^9.5.4",
     "eslint": "^8.13.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "postcss-cli": "^9.1.0",
     "static-server": "^2.2.1"
   }
 }

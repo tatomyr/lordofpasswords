@@ -1,9 +1,9 @@
-name: Check the code
+name: Code Check
 
 on:
   pull_request:
     branches:
-    - master
+    - main
 
 jobs:
   lint:

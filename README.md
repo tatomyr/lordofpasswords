@@ -10,7 +10,6 @@ If the user chose using special symbols, the password should also contain at lea
 See the [live page →](https://tatomyr.github.io/lordofpasswords/)
 
 ![check](https://github.com/tatomyr/lordofpasswords/actions/workflows/check.yaml/badge.svg)
-![deploy](https://github.com/tatomyr/lordofpasswords/actions/workflows/deploy.yaml/badge.svg)
 
 ---
 
