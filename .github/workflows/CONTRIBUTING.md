@@ -7,6 +7,8 @@ To launch the project on `localhost:8080`, run `npm start` in the terminal.
 All files are available to edit and deploy inside the root folder.
 We intentionally don't minify nor optimize the code to show users the actual code that runs in the application.
 
+Note: Put your changes related to service worker into `service-worker.template.js` (not to the auto generated one).
+
 ## Testing
 
 Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
