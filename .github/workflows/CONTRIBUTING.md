@@ -21,4 +21,4 @@ The content of the `main` branch will be served via `github-pages`.
 Please create a new branch out of `main`, put your changes there and create a merge request to the `main` branch.
 
 You have to sign off every new release with `npm run build` command before committing the changes.
-This will update `.service-worker.js` file, what ensures cache invalidation.
+This will update `service-worker.generated.js` file, what ensures cache invalidation.
