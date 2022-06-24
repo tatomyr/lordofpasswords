@@ -3,7 +3,7 @@
 const dev = location.hostname === 'localhost'
 console.log(`Build date: __BUILD_DATE__, ${dev ? 'development mode' : 'production mode'}`)
 
-const CASHE_NAME = 'v4'
+const CASHE_NAME = 'v5'
 const FILES_TO_CASHE = [
   './',
   './index.html',
