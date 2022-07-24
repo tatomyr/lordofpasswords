@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-const dev = location.hostname === 'localhost'
-console.log(`Build date: Fri 24 Jun 2022 19:40:32 CEST, ${dev ? 'development mode' : 'production mode'}`)
+const dev = window.location.protocol === 'http:'
+console.log(`Build date: Sun 24 Jul 2022 21:07:17 CEST, ${dev ? 'development mode' : 'production mode'}`)
 
-const CASHE_NAME = 'v5'
+const CASHE_NAME = 'lordofpasswords-v1.0.0-beta'
 const FILES_TO_CASHE = [
   './',
   './index.html',

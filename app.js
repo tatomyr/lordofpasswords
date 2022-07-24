@@ -121,6 +121,7 @@ const app = (() => {
     $elements.password.className = ''
     $elements.password.value = password
     $elements.password.select()
+    // FIXME: deprecated
     if (document.execCommand('copy')) {
       onSuccessfullCopy()
     } else {
@@ -137,12 +138,12 @@ const app = (() => {
       passwordLength: { value },
     },
   }) => {
-    localStorage.setItem('passwordLength', value)
+    localStorage.setItem('lordofpasswords_passwordlength', value)
   }
 
   const resetPasswordLength = () => {
-    if (+localStorage.passwordLength) {
-      $elements.passwordLength.value = +localStorage.passwordLength
+    if (+localStorage.lordofpasswords_passwordlength) {
+      $elements.passwordLength.value = +localStorage.lordofpasswords_passwordlength
     }
     $elements.passwordLength.className = ''
   }
