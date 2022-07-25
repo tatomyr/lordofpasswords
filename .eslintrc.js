@@ -13,7 +13,7 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'never'],
-    'arrow-parens': ['error', 'as-needed'],
+    'arrow-parens': 'off',
     'import/prefer-default-export': 'off',
     'comma-dangle': [
       'error',

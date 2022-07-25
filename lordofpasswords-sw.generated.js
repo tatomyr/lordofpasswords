@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log(`Build date: Mon 25 Jul 2022 10:10:07 CEST`)
+console.log('Build date: Mon 25 Jul 2022 11:01:39 CEST')
 
 const CASHE_NAME = 'lordofpasswords-v1.0.0-beta'
 const FILES_TO_CASHE = [
@@ -33,32 +33,26 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   console.log('[lordofpasswords-sw] Activate')
   e.waitUntil(
-    caches.keys().then((keyList) =>
-      Promise.all(
-        // eslint-disable-next-line array-callback-return, consistent-return
-        keyList.map((key) => {
-          if (key !== CASHE_NAME) {
-            console.log(
-              '[lordofpasswords-sw] Removing old cache',
-              key
-            )
-            return caches.delete(key)
-          }
-        })
-      )
-    )
+    caches.keys().then((keyList) => Promise.all(
+      // eslint-disable-next-line array-callback-return, consistent-return
+      keyList.map((key) => {
+        if (key !== CASHE_NAME) {
+          console.log('[lordofpasswords-sw] Removing old cache', key)
+          return caches.delete(key)
+        }
+      })
+    ))
   )
   return self.clients.claim()
 })
 
 self.addEventListener('fetch', (e) => {
-  console.log('[Service Worker] Fetch', e.request.url)
+  console.log('[lordofpasswords-sw] Fetch', e.request.url)
   e.respondWith(
     caches
       .match(e.request)
       .then(
-        (res) =>
-          res || new Response('Locked', { status: 423, statusText: 'Locked' })
+        (res) => res || new Response('Locked', { status: 423, statusText: 'Locked' })
       )
   )
 })
