@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const app = (() => {
+const lordOfPasswordsApp = (() => {
   // Define constants
   const NUMBERS = '0123456789'
   const UPPERCASED = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -121,6 +121,7 @@ const app = (() => {
     $elements.password.className = ''
     $elements.password.value = password
     $elements.password.select()
+    // FIXME: deprecated
     if (document.execCommand('copy')) {
       onSuccessfullCopy()
     } else {
@@ -137,12 +138,12 @@ const app = (() => {
       passwordLength: { value },
     },
   }) => {
-    localStorage.setItem('passwordLength', value)
+    localStorage.setItem('lordofpasswords_passwordlength', value)
   }
 
   const resetPasswordLength = () => {
-    if (+localStorage.passwordLength) {
-      $elements.passwordLength.value = +localStorage.passwordLength
+    if (+localStorage.lordofpasswords_passwordlength) {
+      $elements.passwordLength.value = +localStorage.lordofpasswords_passwordlength
     }
     $elements.passwordLength.className = ''
   }
@@ -164,21 +165,24 @@ const app = (() => {
     resetPasswordLength()
     $elements.service.focus()
     // Registering service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('./service-worker.generated.js')
-        .then(registration => {
-          // eslint-disable-next-line no-console
-          console.info('Registration successful, scope is:', registration.scope)
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.info('Service worker registration failed, error:', error)
-        })
-    }
   }())
 
   return {
     handleSubmit,
   }
 })()
+
+const dev = window.location.protocol === 'http:'
+
+if ('serviceWorker' in navigator && !dev) {
+  navigator.serviceWorker
+    .register('./lordofpasswords-sw.generated.js')
+    .then(registration => {
+      // eslint-disable-next-line no-console
+      console.info('[lordofpasswords-sw] Registration successful, scope is:', registration.scope)
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.info('[lordofpasswords-sw] Service worker registration failed, error:', error)
+    })
+}
