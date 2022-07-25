@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const app = (() => {
+const lordOfPasswordsApp = (() => {
   // Define constants
   const NUMBERS = '0123456789'
   const UPPERCASED = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -165,21 +165,24 @@ const app = (() => {
     resetPasswordLength()
     $elements.service.focus()
     // Registering service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('./service-worker.generated.js')
-        .then(registration => {
-          // eslint-disable-next-line no-console
-          console.info('Registration successful, scope is:', registration.scope)
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.info('Service worker registration failed, error:', error)
-        })
-    }
   }())
 
   return {
     handleSubmit,
   }
 })()
+
+const dev = window.location.protocol === 'http:'
+
+if ('serviceWorker' in navigator && !dev) {
+  navigator.serviceWorker
+    .register('./lordofpasswords-sw.generated.js')
+    .then(registration => {
+      // eslint-disable-next-line no-console
+      console.info('[lordofpassword-sw] Registration successful, scope is:', registration.scope)
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.info('[lordofpassword-sw] Service worker registration failed, error:', error)
+    })
+}
