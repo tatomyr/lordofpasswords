@@ -27,6 +27,8 @@ module.exports = {
     ],
     'no-mixed-operators': 'off',
     'no-plusplus': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
   },
   ignorePatterns: ['cypress/plugins/index.js'],
 }
