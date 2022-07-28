@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log('Build date: Mon 25 Jul 2022 11:01:39 CEST')
+console.log('Build date: Thu 28 Jul 2022 19:07:40 CEST')
 
-const CASHE_NAME = 'lordofpasswords-v1.0.0-beta'
+const APP_SCOPE = 'lordofpasswords'
+const cacheName = `${APP_SCOPE}@1.0.0-beta`
 const FILES_TO_CASHE = [
   './',
   './index.html',
@@ -24,30 +25,31 @@ const FILES_TO_CASHE = [
 ]
 
 self.addEventListener('install', (e) => {
-  console.log('[lordofpasswords-sw] Install')
+  console.log('[lordofpasswords.sw] Install')
   e.waitUntil(
-    caches.open(CASHE_NAME).then((cache) => cache.addAll(FILES_TO_CASHE))
+    caches.open(cacheName).then((cache) => cache.addAll(FILES_TO_CASHE))
   )
 })
 
 self.addEventListener('activate', (e) => {
-  console.log('[lordofpasswords-sw] Activate')
+  console.log('[lordofpasswords.sw] Activate')
   e.waitUntil(
     caches.keys().then((keyList) => Promise.all(
       // eslint-disable-next-line array-callback-return, consistent-return
       keyList.map((key) => {
-        if (key !== CASHE_NAME) {
-          console.log('[lordofpasswords-sw] Removing old cache', key)
+        if (key !== cacheName) {
+          console.log('[lordofpasswords.sw] Removing old cache', key)
           return caches.delete(key)
         }
       })
     ))
   )
+  console.log(self.clients)
   return self.clients.claim()
 })
 
 self.addEventListener('fetch', (e) => {
-  console.log('[lordofpasswords-sw] Fetch', e.request.url)
+  console.log('[lordofpasswords.sw] Fetch', e.request.url)
   e.respondWith(
     caches
       .match(e.request)

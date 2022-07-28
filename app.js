@@ -122,6 +122,7 @@ const lordOfPasswordsApp = (() => {
     $elements.password.value = password
     $elements.password.select()
     // FIXME: deprecated
+    // navigator.clipboard.writeText(...).then...
     if (document.execCommand('copy')) {
       onSuccessfullCopy()
     } else {
@@ -176,13 +177,13 @@ const dev = window.location.protocol === 'http:'
 
 if ('serviceWorker' in navigator && !dev) {
   navigator.serviceWorker
-    .register('./lordofpasswords-sw.generated.js')
+    .register('./lordofpasswords.sw.generated.js')
     .then(registration => {
       // eslint-disable-next-line no-console
-      console.info('[lordofpasswords-sw] Registration successful, scope is:', registration.scope)
+      console.info('[lordofpasswords.sw] Registration successful, scope is:', registration.scope)
     })
     .catch(error => {
       // eslint-disable-next-line no-console
-      console.info('[lordofpasswords-sw] Service worker registration failed, error:', error)
+      console.info('[lordofpasswords.sw] Service worker registration failed, error:', error)
     })
 }
