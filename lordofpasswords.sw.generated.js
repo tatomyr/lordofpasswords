@@ -1,9 +1,11 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log('Build date: Fri 29 Jul 2022 08:45:46 CEST')
+console.log('Build date: Fri 29 Jul 2022 22:07:07 CEST')
 
-const APP_SCOPE = 'lordofpasswords'
-const cacheName = `${APP_SCOPE}@1.0.0-beta.1`
+const appScope = self.registration.scope
+
+const cacheName = `${appScope}@1.0.0-beta.2`
+
 const FILES_TO_CACHE = [
   './',
   './index.html',
@@ -40,7 +42,7 @@ self.addEventListener('activate', (e) => {
       Promise.all(
         // eslint-disable-next-line array-callback-return, consistent-return
         keyList.map((key) => {
-          if (key !== cacheName) {
+          if (key !== cacheName/*  && key.startsWith(appScope) */) {
             console.log('[lordofpasswords.sw] Removing old cache', key)
             return caches.delete(key)
           }
@@ -48,7 +50,6 @@ self.addEventListener('activate', (e) => {
       )
     )
   )
-  console.log(self.clients)
   return self.clients.claim()
 })
 
@@ -74,8 +75,7 @@ self.addEventListener('fetch', (e) => {
           )
 
           const precachedFiles = FILES_TO_CACHE.map(
-            (relativePath) =>
-              new URL(relativePath, self.registration.scope).href
+            (relativePath) => new URL(relativePath, appScope).href
           )
           if (!precachedFiles.includes(e.request.url)) {
             return new Response('Locked', { status: 423, statusText: 'Locked' })
