@@ -37,15 +37,14 @@ The short answer is yes, it is. And that's why.
 Using this application is completely anonymous.
 It doesn't track your identity, so it doesn't know which user has issued the password.
 
-Moreover, it neither sends your data over the internet nor stores it, except for password length.
-It is being stored locally for the sake of users' convenience, so you don't need to enter the number each time.
+Moreover, it neither sends your data over the Internet nor stores it, except for password length.
+It is being stored locally for users' convenience, so you don't need to enter the number each time.
 You can go completely offline, and your app will continue working because we don't rely on any remote database.
 So no one could crack your sensitive data because it isn't stored anywhere but inside your head.
 
 To ensure that someone else cannot access your data, we don't depend on any third-party library that may change over time and possibly bring malicious instructions.
 
-Also, we prevent any calls over the internet from this application.
-So even if some malicious extension did read your personal data, they wouldn't have sent them anywhere.
+Also, we prevent any Internet calls from this application besides the resources for initial caching.
 
 We don't minify nor uglify the app code, so you can check it using developer tools.
 All the application's code is also available on Github.

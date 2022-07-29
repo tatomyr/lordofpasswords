@@ -6,7 +6,6 @@ describe('Modern Password Generator', () => {
     cy.visit('/')
   })
   it('passes all the flow', () => {
-    cy.get('#password').should('have.class', 'hidden')
     cy.get('#passwordLength')
       .clear()
       .type(6)
@@ -17,9 +16,6 @@ describe('Modern Password Generator', () => {
     cy.on('window:alert', message => {
       expect(message).to.equal('Could not copy the password. Please do it manually: 6Bt$70')
     })
-    cy.get('#password')
-      .should('have.class', 'hidden')
-      .should('have.value', '')
     cy.get('#service:focus').should('have.value', '')
   })
   it(`

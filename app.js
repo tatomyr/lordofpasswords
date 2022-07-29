@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const lordOfPasswordsApp = (() => {
+(() => {
   // Define constants
   const NUMBERS = '0123456789'
   const UPPERCASED = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -99,7 +99,7 @@ const lordOfPasswordsApp = (() => {
   const $elements = {
     passwordLength: document.getElementById('passwordLength'),
     service: document.getElementById('service'),
-    password: document.getElementById('password'),
+    form: document.getElementById('generate-password-form'),
     submitButton: document.getElementById('submit'),
     notification: document.getElementById('notification'),
     key: document.getElementById('key'),
@@ -117,21 +117,17 @@ const lordOfPasswordsApp = (() => {
   }
 
   // Handlers
-  const copyPassword = password => {
-    $elements.password.className = ''
-    $elements.password.value = password
-    $elements.password.select()
-    // FIXME: deprecated
-    // navigator.clipboard.writeText(...).then...
-    if (document.execCommand('copy')) {
+  const copyPassword = async (password) => {
+    try {
+      navigator.clipboard.writeText(password)
       onSuccessfullCopy()
-    } else {
-      // eslint-disable-next-line no-alert
-      alert(`Could not copy the password. Please do it manually: ${password}`)
+    } catch (err) {
+      window.alert(
+        `Could not copy the password. Please do it manually: ${password}`
+      )
+    } finally {
+      $elements.service.focus()
     }
-    $elements.password.className = 'hidden'
-    $elements.password.value = ''
-    $elements.service.focus()
   }
 
   const savePasswordLength = ({
@@ -143,39 +139,31 @@ const lordOfPasswordsApp = (() => {
   }
 
   const resetPasswordLength = () => {
-    if (+localStorage.lordofpasswords_passwordlength) {
-      $elements.passwordLength.value = +localStorage.lordofpasswords_passwordlength
+    const length = +localStorage.lordofpasswords_passwordlength
+    if (length) {
+      $elements.passwordLength.value = length
     }
-    $elements.passwordLength.className = ''
   }
 
-  // Exported methods
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     savePasswordLength(e)
-    getRecurrPw(inputAdapter(e.target), password => {
+    getRecurrPw(inputAdapter(e.target), (password) => {
       e.target.reset()
       resetPasswordLength()
       copyPassword(password)
     })
   }
 
-  // Startup initial settings
   // eslint-disable-next-line semi-style
   ;(function STARTUP() {
     resetPasswordLength()
     $elements.service.focus()
-    // Registering service worker
+    $elements.form.addEventListener('submit', handleSubmit)
   }())
-
-  return {
-    handleSubmit,
-  }
 })()
 
-const dev = window.location.protocol === 'http:'
-
-if ('serviceWorker' in navigator && !dev) {
+if ('serviceWorker' in navigator && window.location.protocol !== 'http:') {
   navigator.serviceWorker
     .register('./lordofpasswords.sw.generated.js')
     .then(registration => {
