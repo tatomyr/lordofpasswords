@@ -134,6 +134,7 @@ button {
   border: 1px solid #f39e1e;
   width: 300px;
   max-width: 100%;
+  user-select: none;
 }
 
 input:focus,
