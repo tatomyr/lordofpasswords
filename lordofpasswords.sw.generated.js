@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log('Build date: Fri 29 Jul 2022 22:07:07 CEST')
+console.log('Build date: Sun Mar 24 23:37:57 EET 2024')
 
 const appScope = self.registration.scope
 
-const cacheName = `${appScope}@1.0.0-beta.2`
+const cacheName = `${appScope}@1.0.0-beta.4`
 
 const FILES_TO_CACHE = [
   './',

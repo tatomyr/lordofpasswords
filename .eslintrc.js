@@ -9,7 +9,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2022,
   },
   rules: {
     semi: ['error', 'never'],
@@ -30,6 +30,9 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
     'no-alert': 'off',
+    'object-curly-spacing': 'off',
+    quotes: 'off',
+    'import/extensions': ['error', 'always'],
   },
   ignorePatterns: ['cypress/plugins/index.js'],
 }
