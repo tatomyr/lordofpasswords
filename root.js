@@ -113,7 +113,7 @@ const root = () => render`
               </div>
             `
             : render`
-              <button name="copypassword">
+              <button name="copypassword" id="submit">
                 Copy password to clipboard
               </button>
               <button name="showpassword">

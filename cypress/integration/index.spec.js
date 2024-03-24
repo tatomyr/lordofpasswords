@@ -6,7 +6,7 @@ describe('Modern Password Generator', () => {
     cy.visit('/')
   })
   it('passes all the flow', () => {
-    cy.get('#passwordLength')
+    cy.get('#passwordlength')
       .clear()
       .type(6)
     cy.get('#service').type('service')
@@ -25,7 +25,7 @@ describe('Modern Password Generator', () => {
     length 6
     using special characters
   `, () => {
-    cy.get('#passwordLength')
+    cy.get('#passwordlength')
       .clear()
       .type(6)
     cy.get('#service').type('aEJ--O')
@@ -42,7 +42,7 @@ describe('Modern Password Generator', () => {
     const passwordLength = getRandom.int(6, 64)
     cy.get('#service').type(service)
     cy.get('#masterpassword').type(masterpassword)
-    cy.get('#passwordLength')
+    cy.get('#passwordlength')
       .clear()
       .type(passwordLength)
     cy.get('#special').click()
@@ -63,7 +63,7 @@ describe('Modern Password Generator', () => {
     cy.get('#service').type(service)
     cy.get('#masterpassword').type(masterpassword)
     let passwordLength
-    cy.get('#passwordLength')
+    cy.get('#passwordlength')
       .clear()
       .type(0)
       .type('{uparrow}')
@@ -90,7 +90,7 @@ describe('Modern Password Generator', () => {
     const passwordLength = getRandom.int(6, 64)
     cy.get('#service').type(service)
     cy.get('#masterpassword').type(masterpassword)
-    cy.get('#passwordLength')
+    cy.get('#passwordlength')
       .clear()
       .type(passwordLength)
     cy.get('#submit').click()
@@ -105,10 +105,10 @@ describe('Modern Password Generator', () => {
     })
   })
   it('should contain a link to the repository with documentation', () => {
-    cy.contains('a', 'info on Github').should(
+    cy.contains('a', 'GitHub').should(
       'have.attr',
       'href',
-      'https://github.com/tatomyr/lordofpasswords'
+      'https://github.com/tatomyr/lordofpasswords#lord-of-passwords'
     )
   })
 })
