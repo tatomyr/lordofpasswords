@@ -11,7 +11,7 @@ describe("Modern Password Generator", () => {
     cy.get("#masterpassword").type("salt")
     cy.get("#special").click()
     cy.get("#submit").click()
-    cy.on("window:alert", (message) => {
+    cy.on("window:alert", message => {
       expect(message).to.equal(
         "Could not copy the password. Please do it manually: 6Bt$70"
       )
@@ -30,7 +30,7 @@ describe("Modern Password Generator", () => {
     cy.get("#masterpassword").type("*D6hR")
     cy.get("#special").click()
     cy.get("#submit").click()
-    cy.on("window:alert", (message) => {
+    cy.on("window:alert", message => {
       expect(message).to.equal(
         "Could not copy the password. Please do it manually: 8u@0CK"
       )
@@ -45,7 +45,7 @@ describe("Modern Password Generator", () => {
     cy.get("#passwordlength").clear().type(passwordLength)
     cy.get("#special").click()
     cy.get("#submit").click()
-    cy.on("window:alert", (message) => {
+    cy.on("window:alert", message => {
       const [password] = message.split(" ").reverse()
       expect(password).to.have.length(passwordLength)
       const countForPassword = countOf(password)
@@ -71,7 +71,7 @@ describe("Modern Password Generator", () => {
       })
     cy.get("#special").click()
     cy.get("#submit").click()
-    cy.on("window:alert", (message) => {
+    cy.on("window:alert", message => {
       const [password] = message.split(" ").reverse()
       expect(password).to.have.length(passwordLength)
       const countForPassword = countOf(password)
@@ -94,7 +94,7 @@ describe("Modern Password Generator", () => {
     cy.get("#service").type(service)
     cy.get("#masterpassword").type(masterpassword)
     cy.get("#submit").click()
-    cy.on("window:alert", (message) => {
+    cy.on("window:alert", message => {
       const [password] = message.split(" ").reverse()
       passwords.push(password)
       expect(passwords[0]).to.not.equal(passwords[1])

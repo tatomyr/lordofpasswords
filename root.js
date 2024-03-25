@@ -19,7 +19,7 @@ const onSuccessfullCopy = () => {
 }
 
 // Handlers
-const copyPassword = async (password) => {
+const copyPassword = async password => {
   try {
     navigator.clipboard.writeText(password)
     onSuccessfullCopy()
@@ -31,12 +31,12 @@ const copyPassword = async (password) => {
   }
 }
 
-const handleSubmit = (e) => {
+const handleSubmit = e => {
   e.preventDefault()
   const passwordlength = +e.target.passwordlength.value
   put({passwordlength})
   setState(() => ({passwordlength}))
-  getRecurrPw(inputAdapter(e.target), (password) => {
+  getRecurrPw(inputAdapter(e.target), password => {
     e.target.reset()
     if (e.submitter.name === "showpassword") {
       setTimeout(() => window.alert(password), 300)
@@ -133,14 +133,14 @@ mount(root)
 if ("serviceWorker" in navigator && window.location.protocol !== "http:") {
   navigator.serviceWorker
     .register("./lordofpasswords.sw.generated.js")
-    .then((registration) => {
+    .then(registration => {
       // eslint-disable-next-line no-console
       console.info(
         "[lordofpasswords.sw] Registration successful, scope is:",
         registration.scope
       )
     })
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.info(
         "[lordofpasswords.sw] Service worker registration failed, error:",

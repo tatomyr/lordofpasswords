@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  code-style:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js for use with actions

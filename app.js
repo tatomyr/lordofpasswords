@@ -6,7 +6,7 @@ const SPECIALS = "!$-+,.#@"
 const STANDARD_CHARSET = `${NUMBERS}${UPPERCASED}${LOWERCASED}`
 const EXTENDED_CHARSET = `${STANDARD_CHARSET}${SPECIALS}`
 
-const pickChar = (charset) => (code) => charset[code % charset.length]
+const pickChar = charset => code => charset[code % charset.length]
 
 // Hashing algorithm
 const pw3 = (service_, salt_, pwLength, special) => {
@@ -51,8 +51,7 @@ const pw3 = (service_, salt_, pwLength, special) => {
   return password
 }
 
-const testFor = (char) => (charsArray) =>
-  charsArray.indexOf(char) === -1 ? 0 : 1
+const testFor = char => charsArray => (charsArray.indexOf(char) === -1 ? 0 : 1)
 
 // Rehashing password to match needed conditions
 export const getRecurrPw = (

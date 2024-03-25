@@ -23,7 +23,7 @@ const uninstallProcess = exec(
   `npm uninstall -D ${dependensiesList}`,
   processOutput
 )
-uninstallProcess.on("exit", (command1) => {
+uninstallProcess.on("exit", command1 => {
   if (command1 !== 0) {
     console.log("Exit command:", command1)
   }
@@ -37,7 +37,7 @@ uninstallProcess.on("exit", (command1) => {
     `npm install -D ${dependensiesList}`,
     processOutput
   )
-  installProcess.on("exit", (command2) => {
+  installProcess.on("exit", command2 => {
     if (command2 !== 0) {
       console.log("Exit command:", command2)
     }
