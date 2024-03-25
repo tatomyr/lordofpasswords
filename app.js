@@ -52,7 +52,7 @@ const pw3 = (service_, salt_, pwLength, special) => {
 }
 
 const testFor = (char) => (charsArray) =>
-  (charsArray.indexOf(char) === -1 ? 0 : 1)
+  charsArray.indexOf(char) === -1 ? 0 : 1
 
 // Rehashing password to match needed conditions
 export const getRecurrPw = (

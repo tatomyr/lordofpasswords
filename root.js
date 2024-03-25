@@ -1,4 +1,5 @@
-import {init, render, ls} from "https://tatomyr.github.io/purity/index.js"
+import {init, render} from "https://tatomyr.github.io/purity/purity.js"
+import {ls} from "https://tatomyr.github.io/purity/ls.js"
 import {getRecurrPw, inputAdapter} from "./app.js"
 
 const {put, get} = ls("lordofpasswords")
@@ -23,8 +24,9 @@ const copyPassword = async (password) => {
     navigator.clipboard.writeText(password)
     onSuccessfullCopy()
   } catch (err) {
-    window.alert(
-      `Could not copy the password. Please do it manually: ${password}`
+    window.prompt(
+      `Could not copy the password. Please do it manually:`,
+      password
     )
   }
 }

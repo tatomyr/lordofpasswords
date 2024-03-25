@@ -9,6 +9,8 @@
     "e2e": "bash bin/test.sh",
     "cypress": "cypress open --config baseUrl=http://localhost:8080",
     "build": "bash bin/build.sh",
+    "prettier:check": "npx prettier --check \"**/*.{js,html,yaml,css,md}\"",
+		"prettier": "npx prettier --write \"**/*.{js,html,yaml,css,md}\"",
     "fresh": "bash bin/fresh.sh",
     "upgrade": "node bin/upgrade.js"
   },
@@ -17,9 +19,8 @@
   "devDependencies": {
     "chalk": "^5.0.1",
     "cypress": "^9.5.4",
-    "eslint": "^8.13.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
     "static-server": "^2.2.1"
   }
 }

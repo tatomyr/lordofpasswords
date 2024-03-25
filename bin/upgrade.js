@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console, import/no-extraneous-dependencies */
+/* eslint-disable no-undef */
 
-const { exec } = require('child_process')
-const fs = require('fs')
-const chalk = require('chalk')
-const { devDependencies } = require('../package.json')
+const {exec} = require("child_process")
+const fs = require("fs")
+const chalk = require("chalk")
+const {devDependencies} = require("../package.json")
 
 console.log()
-console.log(chalk.yellow('Upgrading dev dependencies. Please wait'))
+console.log(chalk.yellow("Upgrading dev dependencies. Please wait"))
 console.log()
-const dependensiesList = Object.keys(devDependencies).join(' ')
+const dependensiesList = Object.keys(devDependencies).join(" ")
 const processOutput = (error, stdout, stderr) => {
   if (error) {
     console.log(chalk.red(error))
@@ -19,29 +19,42 @@ const processOutput = (error, stdout, stderr) => {
   console.log(chalk.blue(stdout))
   console.log(chalk.red(stderr))
 }
-const uninstallProcess = exec(`npm uninstall -D ${dependensiesList}`, processOutput)
-uninstallProcess.on('exit', command1 => {
+const uninstallProcess = exec(
+  `npm uninstall -D ${dependensiesList}`,
+  processOutput
+)
+uninstallProcess.on("exit", (command1) => {
   if (command1 !== 0) {
-    console.log('Exit command:', command1)
+    console.log("Exit command:", command1)
   }
   console.log()
-  console.log(chalk.yellow(`Removed ${Object.keys(devDependencies).length} packages`))
-  console.log(chalk.yellow('Installing new ones'))
+  console.log(
+    chalk.yellow(`Removed ${Object.keys(devDependencies).length} packages`)
+  )
+  console.log(chalk.yellow("Installing new ones"))
   console.log()
-  const installProcess = exec(`npm install -D ${dependensiesList}`, processOutput)
-  installProcess.on('exit', command2 => {
+  const installProcess = exec(
+    `npm install -D ${dependensiesList}`,
+    processOutput
+  )
+  installProcess.on("exit", (command2) => {
     if (command2 !== 0) {
-      console.log('Exit command:', command2)
+      console.log("Exit command:", command2)
     }
-    const updatedDependencies = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
-      .devDependencies
+    const updatedDependencies = JSON.parse(
+      fs.readFileSync("./package.json", "utf-8")
+    ).devDependencies
     console.log()
-    console.log(chalk.yellow(`Installed ${Object.keys(devDependencies).length} packages`))
+    console.log(
+      chalk.yellow(`Installed ${Object.keys(devDependencies).length} packages`)
+    )
     // eslint-disable-next-line no-restricted-syntax
     for (const name in devDependencies) {
       if (devDependencies[name] !== updatedDependencies[name]) {
         console.log(
-          chalk.green(`  ↑ ${name}: ${devDependencies[name]} → ${updatedDependencies[name]}`)
+          chalk.green(
+            `  ↑ ${name}: ${devDependencies[name]} → ${updatedDependencies[name]}`
+          )
         )
       }
     }

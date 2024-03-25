@@ -3,39 +3,35 @@ name: Code Check
 on:
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Node.js for use with actions
-      uses: actions/setup-node@v2
-      with:
-        version: 16.x
-
-    - name: Checkout branch
-      uses: actions/checkout@v2
-
-    - name: Clean install dependencies
-      run: npm ci
-
-    - name: Lint
-      run: npm run lint
+      - name: Setup Node.js for use with actions
+        uses: actions/setup-node@v2
+        with:
+          version: 16.x
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Clean install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Prettier Check
+        run: npm run prettier:check
 
   e2e-test:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Node.js for use with actions
-      uses: actions/setup-node@v2
-      with:
-        version: 16.x
-
-    - name: Checkout branch
-      uses: actions/checkout@v2
-
-    - name: Clean install dependencies
-      run: npm ci
-
-    - name: E2E tests
-      run: npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
+      - name: Setup Node.js for use with actions
+        uses: actions/setup-node@v2
+        with:
+          version: 16.x
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Clean install dependencies
+        run: npm ci
+      - name: E2E tests
+        run: npx static-server -p 8081 & $(npm bin)/cypress run --config baseUrl=http://localhost:8081
