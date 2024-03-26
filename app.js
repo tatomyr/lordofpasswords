@@ -90,14 +90,11 @@ export const getRecurrPw = (
       )
 }
 
-export const inputAdapter = ({
-  passwordlength: {value: passwordLength},
-  service: {value: service},
-  masterpassword: {value: masterpassword},
-  special: {checked: special},
-}) => ({
-  pwLength: +passwordLength,
-  service,
-  salt: masterpassword,
-  special,
+export const inputAdapter = target => ({
+  pwLength: +target.passwordlength.value,
+  service: target.casesensitive.checked
+    ? target.service.value
+    : target.service.value.toLowerCase(),
+  salt: target.masterpassword.value,
+  special: target.special.checked,
 })

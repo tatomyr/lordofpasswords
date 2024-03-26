@@ -4,81 +4,107 @@ import {getRandom} from "../../test-utils/helpers"
 
 describe("Compatibility with the Classical Password Generator", () => {
   let password
+  let stub
   beforeEach(() => {
     cy.visit("/")
+    stub = cy.stub()
+    cy.on("window:alert", stub)
   })
-  it("generating password of length 6 with the standard charset", () => {
-    cy.get("#passwordlength").clear().type(6)
-    cy.get("#service").type("service")
-    cy.get("#masterpassword").type("salt")
-    cy.get("#submit").click()
-    cy.on("window:alert", message => {
-      const [pw] = message.split(" ").reverse()
-      expect(pw).to.equal("9Kb6vH")
-    })
-  })
-  it("generating password of length 6 with the standard charset", () => {
-    const data = ["service", "salt", 6]
-    getRecurrPw(...data, pw => {
+  it("should generate password of length 6 with the standard charset", () => {
+    const service = "service"
+    const masterpassword = "salt"
+    const passwordlength = 6
+    getRecurrPw(service.toLowerCase(), masterpassword, passwordlength, pw => {
       password = pw
     })
-    cy.get("#passwordlength").clear().type(data[2])
-    cy.get("#service").type(data[0])
-    cy.get("#masterpassword").type(data[1])
-    cy.get("#submit").click()
-    cy.on("window:alert", message => {
-      const [pw] = message.split(" ").reverse()
-      expect(pw).to.equal(password)
-    })
+    cy.get("#service").type(service)
+    cy.get("#masterpassword").type(masterpassword)
+    cy.get("#passwordlength").clear().type(passwordlength)
+    cy.get("[name=showpassword]")
+      .click()
+      .then(() => {
+        cy.wait(1000).then(() => {
+          const pw = stub.getCall(0).args[0]
+          expect(pw).to.equal(password)
+        })
+      })
   })
-  it("generating password of length 64 with the standard charset", () => {
-    const data = ["service", "salt", 64]
-    getRecurrPw(...data, pw => {
+  it("should generate password of length 64 with the standard charset", () => {
+    const service = "Service"
+    const masterpassword = "salt"
+    const passwordlength = 64
+    getRecurrPw(service.toLowerCase(), masterpassword, passwordlength, pw => {
       password = pw
     })
-    cy.get("#passwordlength").clear().type(data[2])
-    cy.get("#service").type(data[0])
-    cy.get("#masterpassword").type(data[1])
-    cy.get("#submit").click()
-    cy.on("window:alert", message => {
-      const [pw] = message.split(" ").reverse()
-      expect(pw).to.equal(password)
-    })
+    cy.get("#service").type(service)
+    cy.get("#masterpassword").type(masterpassword)
+    cy.get("#passwordlength").clear().type(passwordlength)
+    cy.get("[name=showpassword]")
+      .click()
+      .then(() => {
+        cy.wait(1000).then(() => {
+          const pw = stub.getCall(0).args[0]
+          expect(pw).to.equal(password)
+        })
+      })
   })
-  it("generating password of big random length with the standard charset", () => {
-    const data = [
-      getRandom.string(1, 32), // service
-      getRandom.string(1, 32), // masterpassword (salt)
-      getRandom.int(6, 64), // password length
-    ]
-    getRecurrPw(...data, pw => {
+  it("should generate password of big random length with the standard charset", () => {
+    const service = getRandom.string(1, 32)
+    const masterpassword = getRandom.string(1, 32)
+    const passwordlength = getRandom.int(6, 64)
+    getRecurrPw(service.toLowerCase(), masterpassword, passwordlength, pw => {
       password = pw
     })
-    cy.get("#passwordlength").clear().type(data[2])
-    cy.get("#service").type(data[0])
-    cy.get("#masterpassword").type(data[1])
-    cy.get("#submit").click()
-    cy.on("window:alert", message => {
-      const [pw] = message.split(" ").reverse()
-      expect(pw).to.equal(password)
-    })
+    cy.get("#service").type(service)
+    cy.get("#masterpassword").type(masterpassword)
+    cy.get("#passwordlength").clear().type(passwordlength)
+    cy.get("[name=showpassword]")
+      .click()
+      .then(() => {
+        cy.wait(1000).then(() => {
+          const pw = stub.getCall(0).args[0]
+          expect(pw).to.equal(password)
+        })
+      })
   })
-  it("generating password of moderate random length with the standard charset", () => {
-    const data = [
-      getRandom.string(1, 12), // service
-      getRandom.string(1, 8), // masterpassword (salt)
-      getRandom.int(6, 10), // password length
-    ]
-    getRecurrPw(...data, pw => {
+  it("should generate password of moderate random length with the standard charset", () => {
+    const service = getRandom.string(1, 12)
+    const masterpassword = getRandom.string(1, 8)
+    const passwordlength = getRandom.int(6, 10)
+    getRecurrPw(service.toLowerCase(), masterpassword, passwordlength, pw => {
       password = pw
     })
-    cy.get("#passwordlength").clear().type(data[2])
-    cy.get("#service").type(data[0])
-    cy.get("#masterpassword").type(data[1])
-    cy.get("#submit").click()
-    cy.on("window:alert", message => {
-      const [pw] = message.split(" ").reverse()
-      expect(pw).to.equal(password)
+    cy.get("#service").type(service)
+    cy.get("#masterpassword").type(masterpassword)
+    cy.get("#passwordlength").clear().type(passwordlength)
+    cy.get("[name=showpassword]")
+      .click()
+
+      .then(() => {
+        cy.wait(1000).then(() => {
+          const pw = stub.getCall(0).args[0]
+          expect(pw).to.equal(password)
+        })
+      })
+  })
+  it("should generate password for case sensitive service", () => {
+    const service = getRandom.plainString(10, 10)
+    const masterpassword = getRandom.string(1, 8)
+    const passwordlength = getRandom.int(6, 10)
+    getRecurrPw(service, masterpassword, passwordlength, pw => {
+      password = pw
     })
+    cy.get("#service").type(service)
+    cy.get("#masterpassword").type(masterpassword)
+    cy.get("#passwordlength").clear().type(passwordlength)
+    cy.get("#casesensitive").click()
+    cy.get("[name=showpassword]")
+      .click()
+      .then(() => {
+        cy.wait(1000).then(() => {
+          const pw = stub.getCall(0).args[0]
+          expect(pw).to.equal(password)
+        })
+      })
   })
 })

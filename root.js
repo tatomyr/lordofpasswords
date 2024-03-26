@@ -57,12 +57,12 @@ const root = () => render`
     >
       <section class="form-group">
         <label for="service">
-          <div class="field-name">Public service (site) name</div>
+          <div class="field-name">Public service (site) name <span>🌎</span></div>
           <input
             class="field-value" 
             name="service" 
             id="service"
-            placeholder="service[@behalf][:year][:season]" 
+            placeholder="public service name" 
             required
             autofocus
           />
@@ -71,27 +71,21 @@ const root = () => render`
 
       <section class="form-group">
         <label for="masterpassword">
-          <div class="field-name">Masterpassword</div>
+          <div class="field-name">Masterpassword <span>🔑</span></div>
           <input 
             class="field-value"
             name="masterpassword"
             id="masterpassword"
             type="password"
+            placeholder="your secure key"
             required 
           />
         </label>
       </section>
 
-      <section class="form-group dual">
-        <label for="special" class="inline left">
-          <section class="checkbox-wrapper">
-            <input name="special" id="special" type="checkbox" />
-          </section>
-          <div class="">Specials</div>
-        </label>
-
-        <label for="passwordlength" class="inline right">
-          <div class="">Length</div>
+      <section class="form-group">
+        <label for="passwordlength" class="inline">
+          <div>Password length <span>#️⃣</span></div>
           <input
             name="passwordlength"
             id="passwordlength"
@@ -104,18 +98,31 @@ const root = () => render`
         </label>
       </section>
 
-      <section id="copy" class="form-group buttons">
+      <section class="form-group wrap">
+        <label for="special" class="inline">
+          <section class="checkbox-wrapper">
+            <input name="special" id="special" type="checkbox" />
+          </section>
+          Use special characters
+        </label>
+        <label for="casesensitive" class="inline">
+          <section class="checkbox-wrapper">
+            <input name="casesensitive" id="casesensitive" type="checkbox" />
+          </section>
+          Case sensitive
+        </label>
+      </section>
+
+      <section id="buttons" class="form-group buttons wrap">
         ${
           getState().showNotification
             ? render`
-              <div 
-                class="notification button-like"
-              >
+              <div class="notification button-like">
                 Copied to clipboard
               </div>
             `
             : render`
-              <button name="copypassword" id="submit">
+              <button name="copypassword">
                 Copy password to clipboard
               </button>
               <button name="showpassword">

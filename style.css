@@ -2,7 +2,7 @@ body {
   --primary-color: #404040;
   --border-color: #cfcfcf;
   --background-color: #f1f4f6;
-  --accent-color: purple; /* --accent-color */
+  --accent-color: purple;
   --secondary-text: rgb(145, 121, 145);
   --border-width: 1px;
   --border-radius: 8px;
@@ -28,7 +28,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   padding: 8px 0;
   background-color: white;
 }
@@ -41,7 +40,6 @@ header > svg {
 
 header h1 {
   font-size: 1.4rem;
-  font-weight: bold;
 }
 
 header h2 {
@@ -83,11 +81,6 @@ main form {
   padding: 8px 0;
 }
 
-.dual {
-  display: flex;
-  justify-content: space-between;
-}
-
 label {
   display: flex;
   flex-direction: column;
@@ -100,14 +93,26 @@ label > div {
   user-select: none;
 }
 
-.inline {
-  flex-direction: row;
-  align-items: center;
+label > div > span {
+  opacity: 0;
 }
 
-label:hover,
+label:focus-within > div > span {
+  opacity: 1;
+}
+@media (hover: hover) {
+  label:hover > div > span {
+    opacity: 1;
+  }
+}
+
 label:focus-within {
   color: inherit;
+}
+@media (hover: hover) {
+  label:hover {
+    color: inherit;
+  }
 }
 
 input {
@@ -118,54 +123,42 @@ input {
   font-weight: bold;
 }
 
-input[type="checkbox"] {
-  outline: auto;
+.inline {
+  flex-direction: row;
+  align-items: center;
 }
 
 .inline > div {
   border: var(--border-width) solid var(--border-color);
-  border-right: none;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
   padding: 8px 16px;
-}
-
-.inline.left > div {
-  border-left: none;
-  text-align: left;
-}
-
-.inline.right > div {
-  text-align: right;
+  flex-grow: 1;
 }
 
 .inline > input {
   padding: 8px 4px;
   border: var(--border-width) solid var(--border-color);
-  border-left: none;
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-left: none;
 }
 
-.inline.left > .checkbox-wrapper {
-  border: var(--border-width) solid var(--border-color);
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-  border-right: none;
+.inline > input#passwordlength {
+  min-width: 4em;
 }
 
 .checkbox-wrapper {
   padding: 8px 16px;
 }
 
-.right,
-.left,
-.right > div,
-.left > div {
-  flex-grow: 1;
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
 }
 
 .buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 16px;
 }
 
 button {
@@ -181,10 +174,30 @@ button,
   outline: none;
 }
 
-button:hover,
-button:focus {
+button[name="showpassword"] {
   background-color: var(--background-color);
   color: var(--accent-color);
+}
+
+button:focus {
+  color: var(--accent-color);
+  background: linear-gradient(
+    60deg,
+    rgba(209, 142, 213, 1) 0%,
+    rgba(231, 204, 233, 1) 18%,
+    rgba(241, 244, 246, 1) 100%
+  );
+}
+@media (hover: hover) {
+  button:hover {
+    color: var(--accent-color);
+    background: linear-gradient(
+      60deg,
+      rgba(209, 142, 213, 1) 0%,
+      rgba(231, 204, 233, 1) 18%,
+      rgba(241, 244, 246, 1) 100%
+    );
+  }
 }
 
 .notification {
@@ -214,10 +227,15 @@ a {
   outline: none;
 }
 
-a:focus,
-a:hover {
+a:focus {
   background: var(--background-color);
   color: var(--primary-color);
+}
+@media (hover: hover) {
+  a:hover {
+    background: var(--background-color);
+    color: var(--primary-color);
+  }
 }
 
 a > svg {

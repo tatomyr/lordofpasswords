@@ -13,7 +13,21 @@ function getRandomString(min, max) {
   return text
 }
 
-export const getRandom = {int: getRandomInt, string: getRandomString}
+function getRandomPlainString(min, max) {
+  const n = getRandomInt(min, max)
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+  let text = ""
+  for (let i = 0; i < n; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return text
+}
+
+export const getRandom = {
+  int: getRandomInt,
+  string: getRandomString,
+  plainString: getRandomPlainString,
+}
 
 export const countOf = value => re => {
   const arr = value.match(re)
