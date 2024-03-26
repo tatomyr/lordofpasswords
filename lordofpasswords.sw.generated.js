@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log("Build date: Mon Mar 25 18:47:28 EET 2024")
+console.log("Build date: Tue Mar 26 18:41:20 EET 2024")
 
 const appScope = self.registration.scope
 
@@ -30,22 +30,22 @@ const FILES_TO_CACHE = [
   "https://tatomyr.github.io/purity/ls.js",
 ]
 
-self.addEventListener("install", (e) => {
+self.addEventListener("install", e => {
   console.log("[lordofpasswords.sw] Install")
   e.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(FILES_TO_CACHE))
+    caches.open(cacheName).then(cache => cache.addAll(FILES_TO_CACHE))
   )
 })
 
 // TODO: unregister other service-workers?
 
-self.addEventListener("activate", (e) => {
+self.addEventListener("activate", e => {
   console.log("[lordofpasswords.sw] Activate")
   e.waitUntil(
-    caches.keys().then((keyList) =>
+    caches.keys().then(keyList =>
       Promise.all(
         // eslint-disable-next-line array-callback-return, consistent-return
-        keyList.map((key) => {
+        keyList.map(key => {
           if (key !== cacheName /*  && key.startsWith(appScope) */) {
             console.log("[lordofpasswords.sw] Removing old cache", key)
             return caches.delete(key)
@@ -57,13 +57,13 @@ self.addEventListener("activate", (e) => {
   return self.clients.claim()
 })
 
-self.addEventListener("fetch", (e) => {
+self.addEventListener("fetch", e => {
   console.log("[lordofpasswords.sw] Fetch", e.request.url)
   e.respondWith(
-    caches.open(cacheName).then((cache) =>
+    caches.open(cacheName).then(cache =>
       cache
         .match(e.request)
-        .then((cachedResponse) => {
+        .then(cachedResponse => {
           if (cachedResponse) {
             // If there is an entry in the cache for e.request, then cachedResponse will be defined
             // and we can just return it. Note that in this example, only font resources are cached.
@@ -82,7 +82,7 @@ self.addEventListener("fetch", (e) => {
           // ...since we might use it in a call to cache.put() later on.
           // Both fetch() and cache.put() "consume" the request, so we need to make a copy.
           // (see https://developer.mozilla.org/en-US/docs/Web/API/Request/clone)
-          return fetch(e.request.clone()).then((response) => {
+          return fetch(e.request.clone()).then(response => {
             if (response.ok) {
               console.warn("  Caching the response to", e.request.url)
               cache.put(e.request, response.clone())
@@ -95,7 +95,7 @@ self.addEventListener("fetch", (e) => {
             return response
           })
         })
-        .catch((err) => {
+        .catch(err => {
           // This catch() will handle exceptions that arise from the match() or fetch() operations.
           // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
           // It will return a normal response object that has the appropriate error code set.
