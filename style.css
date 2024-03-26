@@ -2,7 +2,7 @@ body {
   --primary-color: #404040;
   --border-color: #cfcfcf;
   --background-color: #f1f4f6;
-  --accent-color: purple; /* --accent-color */
+  --accent-color: purple;
   --secondary-text: rgb(145, 121, 145);
   --border-width: 1px;
   --border-radius: 8px;
@@ -83,10 +83,6 @@ main form {
   padding: 8px 0;
 }
 
-.dual {
-  display: flex;
-  justify-content: space-between;
-}
 
 label {
   display: flex;
@@ -98,6 +94,14 @@ label {
 label > div {
   background-color: var(--background-color);
   user-select: none;
+}
+
+label > div > span {
+  opacity: 0;
+}
+
+label:hover > div > span, label:focus-within > div > span {
+  opacity: 1;
 }
 
 .inline {
@@ -118,54 +122,38 @@ input {
   font-weight: bold;
 }
 
-input[type="checkbox"] {
-  outline: auto;
-}
-
 .inline > div {
   border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
   border-right: none;
   padding: 8px 16px;
-}
-
-.inline.left > div {
-  border-left: none;
-  text-align: left;
-}
-
-.inline.right > div {
-  text-align: right;
+  flex-grow: 1;
 }
 
 .inline > input {
   padding: 8px 4px;
   border: var(--border-width) solid var(--border-color);
-  border-left: none;
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
-.inline.left > .checkbox-wrapper {
-  border: var(--border-width) solid var(--border-color);
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-  border-right: none;
+.inline > input#passwordlength {
+  min-width: 4em;
 }
 
 .checkbox-wrapper {
   padding: 8px 16px;
 }
 
-.right,
-.left,
-.right > div,
-.left > div {
-  flex-grow: 1;
+.wrap {
+  display: flex;
+    flex-wrap: wrap;
+  column-gap: 16px;
 }
 
 .buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 16px;
+
 }
 
 button {
@@ -181,10 +169,21 @@ button,
   outline: none;
 }
 
+button[name=showpassword] {
+  background-color: var(--background-color);
+  color: var(--accent-color);
+
+
+
+}
+
 button:hover,
 button:focus {
   background-color: var(--background-color);
   color: var(--accent-color);
+  box-shadow: var(--accent-color) 0 0 3px 0px;
+  transition : box-shadow 0.2s ease-in-out;
+  font-weight: bold;
 }
 
 .notification {
