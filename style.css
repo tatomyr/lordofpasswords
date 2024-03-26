@@ -33,7 +33,7 @@ header {
 }
 
 header > svg {
-  transform: scale(0.46);
+  transform: scale(0.4);
   margin: -24px 0 -22px;
   min-width: var(--logo-width);
 }
