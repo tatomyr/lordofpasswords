@@ -113,7 +113,7 @@ const root = () => render`
         </label>
       </section>
 
-      <section id="copy" class="form-group buttons wrap">
+      <section id="buttons" class="form-group buttons wrap">
         ${
           getState().showNotification
             ? render`

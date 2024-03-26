@@ -53,11 +53,10 @@ main {
   padding: 8px 0;
   background-color: white;
   flex-grow: 1;
-  display: flex;
-  justify-content: center;
 }
 
 main form {
+  margin: 0 auto;
   min-width: var(--min-width);
   max-width: 600px;
   padding: 0 8px;
