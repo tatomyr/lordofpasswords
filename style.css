@@ -83,7 +83,6 @@ main form {
   padding: 8px 0;
 }
 
-
 label {
   display: flex;
   flex-direction: column;
@@ -100,7 +99,8 @@ label > div > span {
   opacity: 0;
 }
 
-label:hover > div > span, label:focus-within > div > span {
+label:hover > div > span,
+label:focus-within > div > span {
   opacity: 1;
 }
 
@@ -146,14 +146,13 @@ input {
 
 .wrap {
   display: flex;
-    flex-wrap: wrap;
+  flex-wrap: wrap;
   column-gap: 16px;
 }
 
 .buttons {
   justify-content: space-evenly;
   gap: 16px;
-
 }
 
 button {
@@ -169,12 +168,9 @@ button,
   outline: none;
 }
 
-button[name=showpassword] {
+button[name="showpassword"] {
   background-color: var(--background-color);
   color: var(--accent-color);
-
-
-
 }
 
 button:hover,
@@ -182,7 +178,7 @@ button:focus {
   background-color: var(--background-color);
   color: var(--accent-color);
   box-shadow: var(--accent-color) 0 0 3px 0px;
-  transition : box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
   font-weight: bold;
 }
 
