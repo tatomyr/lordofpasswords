@@ -139,7 +139,7 @@ mount(root)
 
 if ("serviceWorker" in navigator && window.location.protocol !== "http:") {
   navigator.serviceWorker
-    .register("./lordofpasswords.sw.generated.js")
+    .register("./lordofpasswords.sw.js")
     .then(registration => {
       // eslint-disable-next-line no-console
       console.info(

@@ -1,5 +1,4 @@
 // Legacy password hash generator v0.2.0
-/* eslint-disable */
 
 function pwChar(code) {
   const pwCharSet =

@@ -3,7 +3,7 @@
 > **One password to rule them all**
 
 The app generates a unique hashed password for each _service_ using _masterpassword_.
-**Lord of Passwords** uses a special hashing algorithm to ensure that generated passwords contain the needed amount of symbols of each type.
+It uses a special algorithm to ensure that generated passwords contain the required number of symbols of each type.
 Those are at least two numbers, one Latin character in uppercase, and one in lowercase.
 If a user chooses to use special symbols, the password should also contain at least one special character.
 

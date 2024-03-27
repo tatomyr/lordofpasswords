@@ -146,6 +146,10 @@ input {
   min-width: 4em;
 }
 
+input[type="checkbox"] {
+  outline: auto;
+}
+
 .checkbox-wrapper {
   padding: 8px 16px;
 }
@@ -241,4 +245,10 @@ a:focus {
 a > svg {
   display: inline-block;
   height: 0.7em;
+}
+
+.build-info {
+  padding-top: 8px;
+  font-size: small;
+  color: var(--secondary-text);
 }
