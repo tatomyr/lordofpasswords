@@ -1,9 +1,9 @@
 #!/urs/bin/node
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-undef */
 
 const fs = require("fs")
-const execSync = require('child_process').execSync;
+const execSync = require("child_process").execSync
 
 const date = new Date().toDateString()
 const datetime = new Date().toISOString()
@@ -16,14 +16,13 @@ const newHtml = html.replace(
 fs.writeFileSync("./index.html", newHtml)
 
 const serviceWorker = fs.readFileSync("./lordofpasswords.sw.js", "utf8")
-const newServiceWorker = serviceWorker
-  .replaceAll(
-    /\/\* datetime: \*\/.*\/\* :datetime \*\//g,
-    `/* datetime: */"${datetime}"/* :datetime */`
-  )
+const newServiceWorker = serviceWorker.replaceAll(
+  /\/\* datetime: \*\/.*\/\* :datetime \*\//g,
+  `/* datetime: */"${datetime}"/* :datetime */`
+)
 
 fs.writeFileSync("./lordofpasswords.sw.js", newServiceWorker)
 
-execSync('git add index.html lordofpasswords.sw.js')
+execSync("git add index.html lordofpasswords.sw.js")
 
-console.log('Built on ' + datetime)
+console.log("Built on " + datetime)
