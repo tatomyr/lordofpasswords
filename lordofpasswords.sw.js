@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log("Build date: Tue Mar 26 18:41:20 EET 2024")
+console.log("Build date: " + /* datetime: */"2024-03-27T10:15:59.686Z"/* :datetime */)
 
 const appScope = self.registration.scope
 
-const cacheName = `${appScope}@1.0.0-beta.4`
+const cacheName = `${appScope}@` + /* datetime: */"2024-03-27T10:15:59.686Z"/* :datetime */
 
 const FILES_TO_CACHE = [
   "./",
@@ -44,7 +44,6 @@ self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys().then(keyList =>
       Promise.all(
-        // eslint-disable-next-line array-callback-return, consistent-return
         keyList.map(key => {
           if (key !== cacheName /*  && key.startsWith(appScope) */) {
             console.log("[lordofpasswords.sw] Removing old cache", key)

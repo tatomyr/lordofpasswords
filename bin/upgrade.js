@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, no-console */
 
 const {exec} = require("child_process")
 const fs = require("fs")
