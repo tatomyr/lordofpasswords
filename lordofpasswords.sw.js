@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals, no-console */
 
-console.log("Build date: " + /* datetime: */"2024-03-27T10:15:59.686Z"/* :datetime */)
+console.log("Build revision: " + /* datetime: */"2024-03-27T10:24:46.737Z"/* :datetime */)
 
 const appScope = self.registration.scope
 
-const cacheName = `${appScope}@` + /* datetime: */"2024-03-27T10:15:59.686Z"/* :datetime */
+const cacheName = `${appScope}@` + /* datetime: */"2024-03-27T10:24:46.737Z"/* :datetime */
 
 const FILES_TO_CACHE = [
   "./",
