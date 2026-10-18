@@ -1,9 +1,9 @@
-#!/urs/bin/node
+#!/usr/bin/env node
 
-/* eslint-disable no-console, no-undef */
+/* eslint-disable no-console */
 
-const fs = require("fs")
-const execSync = require("child_process").execSync
+import fs from "node:fs"
+import {execSync} from "node:child_process"
 
 const date = new Date().toDateString()
 const datetime = new Date().toISOString()

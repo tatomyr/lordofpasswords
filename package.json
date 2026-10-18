@@ -2,15 +2,19 @@
   "name": "lordofpasswords",
   "version": "1.0.0-rc.1",
   "description": "Password Generator",
-  "main": "dist/index.html",
+  "type": "module",
+  "main": "index.html",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
-    "start": "npx static-server -p 8080",
-    "lint": "eslint .",
+    "start": "http-server -p 8080 -c-1",
+    "lint": "eslint",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "build": "node bin/build.js",
-    "prettier:check": "npx prettier --check \"**/*.{js,html,yaml,css,md}\"",
-    "prettier": "npx prettier --write \"**/*.{js,html,yaml,css,md}\"",
+    "prettier:check": "prettier --check \"**/*.{js,html,yaml,css,md}\"",
+    "prettier": "prettier --write \"**/*.{js,html,yaml,css,md}\"",
     "fresh": "bash bin/fresh.sh",
     "upgrade": "node bin/upgrade.js",
     "prepare": "husky"
@@ -18,11 +22,12 @@
   "author": "tatomyr",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.1",
-    "chalk": "^5.0.1",
-    "eslint": "^8.57.0",
-    "husky": "^9.0.11",
-    "prettier": "^3.2.5",
-    "static-server": "^2.2.1"
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "http-server": "^14.1.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.10"
   }
 }

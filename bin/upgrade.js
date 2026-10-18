@@ -1,62 +1,40 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-undef, no-console */
+/* eslint-disable no-console */
 
-const {exec} = require("child_process")
-const fs = require("fs")
-const chalk = require("chalk")
-const {devDependencies} = require("../package.json")
+import fs from "node:fs"
+import {execSync} from "node:child_process"
+import {styleText} from "node:util"
+
+const readDevDependencies = () =>
+  JSON.parse(fs.readFileSync("./package.json", "utf-8")).devDependencies
+
+const run = command => execSync(command, {stdio: "inherit"})
+
+const devDependencies = readDevDependencies()
+const names = Object.keys(devDependencies)
 
 console.log()
-console.log(chalk.yellow("Upgrading dev dependencies. Please wait"))
+console.log(styleText("yellow", "Upgrading dev dependencies. Please wait"))
 console.log()
-const dependensiesList = Object.keys(devDependencies).join(" ")
-const processOutput = (error, stdout, stderr) => {
-  if (error) {
-    console.log(chalk.red(error))
-    return
-  }
-  console.log(chalk.blue(stdout))
-  console.log(chalk.red(stderr))
-}
-const uninstallProcess = exec(
-  `npm uninstall -D ${dependensiesList}`,
-  processOutput
-)
-uninstallProcess.on("exit", command1 => {
-  if (command1 !== 0) {
-    console.log("Exit command:", command1)
-  }
-  console.log()
-  console.log(
-    chalk.yellow(`Removed ${Object.keys(devDependencies).length} packages`)
-  )
-  console.log(chalk.yellow("Installing new ones"))
-  console.log()
-  const installProcess = exec(
-    `npm install -D ${dependensiesList}`,
-    processOutput
-  )
-  installProcess.on("exit", command2 => {
-    if (command2 !== 0) {
-      console.log("Exit command:", command2)
-    }
-    const updatedDependencies = JSON.parse(
-      fs.readFileSync("./package.json", "utf-8")
-    ).devDependencies
-    console.log()
+// Uninstall first, so that `npm install` picks the latest major versions.
+run(`npm uninstall -D ${names.join(" ")}`)
+console.log()
+console.log(styleText("yellow", `Removed ${names.length} packages`))
+console.log(styleText("yellow", "Installing new ones"))
+console.log()
+run(`npm install -D ${names.join(" ")}`)
+
+const updatedDependencies = readDevDependencies()
+console.log()
+console.log(styleText("yellow", `Installed ${names.length} packages`))
+for (const name of names) {
+  if (devDependencies[name] !== updatedDependencies[name]) {
     console.log(
-      chalk.yellow(`Installed ${Object.keys(devDependencies).length} packages`)
+      styleText(
+        "green",
+        `  ↑ ${name}: ${devDependencies[name]} → ${updatedDependencies[name]}`
+      )
     )
-    // eslint-disable-next-line no-restricted-syntax
-    for (const name in devDependencies) {
-      if (devDependencies[name] !== updatedDependencies[name]) {
-        console.log(
-          chalk.green(
-            `  ↑ ${name}: ${devDependencies[name]} → ${updatedDependencies[name]}`
-          )
-        )
-      }
-    }
-  })
-})
+  }
+}
