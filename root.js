@@ -21,7 +21,7 @@ const onSuccessfullCopy = () => {
 // Handlers
 const copyPassword = async password => {
   try {
-    navigator.clipboard.writeText(password)
+    await navigator.clipboard.writeText(password)
     onSuccessfullCopy()
   } catch (err) {
     window.prompt(

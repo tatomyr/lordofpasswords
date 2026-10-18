@@ -42,6 +42,7 @@ You can go completely offline, and your app will continue working because we don
 So, no one could crack your sensitive data because it isn't stored anywhere but inside your head.
 
 To ensure that someone else cannot access your data, we don't depend on any third-party library that may change over time and possibly bring malicious instructions.
+The only external code is [Purity](https://github.com/tatomyr/purity), a UI library by the same author, which the service worker caches for offline use.
 
 We don't minify nor uglify the app code, so you can check it using developer tools.
 All the application's code is also available on GitHub.

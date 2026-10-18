@@ -1,9 +1,14 @@
+:root {
+  color-scheme: light dark;
+  --primary-color: light-dark(#404040, #e0e0e0);
+  --border-color: light-dark(#cfcfcf, #868686);
+  --background-color: light-dark(white, #202020);
+  --secondary-background: light-dark(#f1f4f6, #303030);
+  --accent-color: light-dark(purple, #c060c0);
+  --secondary-text: light-dark(rgb(145, 121, 145), rgb(186, 162, 186));
+}
+
 body {
-  --primary-color: #404040;
-  --border-color: #cfcfcf;
-  --background-color: #f1f4f6;
-  --accent-color: purple;
-  --secondary-text: rgb(145, 121, 145);
   --border-width: 1px;
   --border-radius: 8px;
   --min-width: 360px;
@@ -29,7 +34,6 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 8px 0;
-  background-color: white;
 }
 
 header > svg {
@@ -51,7 +55,6 @@ header h2 {
 
 main {
   padding: 8px 0;
-  background-color: white;
   flex-grow: 1;
 }
 
@@ -89,7 +92,7 @@ label {
 }
 
 label > div {
-  background-color: var(--background-color);
+  background-color: var(--secondary-background);
   user-select: none;
 }
 
@@ -166,6 +169,13 @@ input[type="checkbox"] {
 }
 
 button {
+  --hover-background: linear-gradient(
+    60deg,
+    color-mix(in srgb, var(--accent-color) 40%, var(--secondary-background)) 0%,
+    color-mix(in srgb, var(--accent-color) 15%, var(--secondary-background)) 18%,
+    var(--secondary-background) 100%
+  );
+
   border: calc(2 * var(--border-width)) solid var(--accent-color);
   background-color: var(--accent-color);
   color: var(--background-color);
@@ -185,22 +195,12 @@ button[name="showpassword"] {
 
 button:focus {
   color: var(--accent-color);
-  background: linear-gradient(
-    60deg,
-    rgba(209, 142, 213, 1) 0%,
-    rgba(231, 204, 233, 1) 18%,
-    rgba(241, 244, 246, 1) 100%
-  );
+  background: var(--hover-background);
 }
 @media (hover: hover) {
   button:hover {
     color: var(--accent-color);
-    background: linear-gradient(
-      60deg,
-      rgba(209, 142, 213, 1) 0%,
-      rgba(231, 204, 233, 1) 18%,
-      rgba(241, 244, 246, 1) 100%
-    );
+    background: var(--hover-background);
   }
 }
 
@@ -215,14 +215,13 @@ button:focus {
 
 footer {
   text-align: center;
-  background-color: var(--background-color);
   padding: 32px 0;
   font-size: 1rem;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: var(--background-color);
   background: var(--primary-color);
   padding: 2px 8px 2px 8px;
   border-radius: calc(var(--border-radius) / 2);

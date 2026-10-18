@@ -51,43 +51,59 @@ const pw3 = (service_, salt_, pwLength, special) => {
   return password
 }
 
-const testFor = char => charsArray => (charsArray.indexOf(char) === -1 ? 0 : 1)
+// A good password has at least this many characters of each type
+const REQUIREMENTS = [
+  {charset: NUMBERS, min: 2},
+  {charset: UPPERCASED, min: 1},
+  {charset: LOWERCASED, min: 1},
+]
+const SPECIAL_REQUIREMENT = {charset: SPECIALS, min: 1}
+
+const getRequirements = special =>
+  special ? [...REQUIREMENTS, SPECIAL_REQUIREMENT] : REQUIREMENTS
+
+const countChars = (password, charset) =>
+  [...password].filter(char => charset.includes(char)).length
+
+const isGoodPassword = (password, special) =>
+  getRequirements(special).every(
+    ({charset, min}) => countChars(password, charset) >= min
+  )
+
+const getMinLength = special => {
+  let minLength = 0
+  for (const {min} of getRequirements(special)) {
+    minLength += min
+  }
+  return minLength
+}
+
+const validateInput = ({service, salt, pwLength, special}) => {
+  if (typeof service !== "string" || service.length === 0) {
+    throw new Error("The service name must be a non-empty string.")
+  }
+  if (typeof salt !== "string" || salt.length === 0) {
+    throw new Error("The masterpassword must be a non-empty string.")
+  }
+  const minLength = getMinLength(special)
+  if (!Number.isInteger(pwLength) || pwLength < minLength) {
+    throw new Error(
+      `The password length must be an integer of at least ${minLength}, got ${pwLength}.`
+    )
+  }
+}
 
 // Rehashing password to match needed conditions
-export const getRecurrPw = (
-  {service = "", salt = "", pwLength = 0, special = false},
-  callback
-) => {
+const rehash = ({service, salt, pwLength, special = false}, callback) => {
   const password = pw3(service, salt, pwLength, special)
-  let upperCasedCount = 0
-  let lowerCasedCount = 0
-  let numbersCount = 0
-  let specialsCount = 0
-  for (let index = 0; index < password.length; index++) {
-    const testIn = testFor(password[index])
-    numbersCount += testIn(NUMBERS)
-    upperCasedCount += testIn(UPPERCASED)
-    lowerCasedCount += testIn(LOWERCASED)
-    specialsCount += testIn(SPECIALS)
-  }
-
-  const goodPassword =
-    numbersCount >= 2 &&
-    upperCasedCount >= 1 &&
-    lowerCasedCount >= 1 &&
-    (!special || specialsCount >= 1)
-
-  return goodPassword
+  return isGoodPassword(password, special)
     ? callback(password)
-    : getRecurrPw(
-        {
-          service: password,
-          salt,
-          pwLength,
-          special,
-        },
-        callback
-      )
+    : rehash({service: password, salt, pwLength, special}, callback)
+}
+
+export const getRecurrPw = (input, callback) => {
+  validateInput(input)
+  return rehash(input, callback)
 }
 
 export const inputAdapter = target => ({
