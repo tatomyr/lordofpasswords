@@ -26,7 +26,7 @@ Please create a new branch out of `main`, put your changes there and create a me
 
 Every new release gets an entry in `CHANGELOG.md` and a version bump in `package.json`.
 The changelog lists only changes that a user of the app can see, such as a new feature, a changed behaviour, or a fixed bug.
-Tests, docs, tooling, and refactoring stay out of it.
+
 Every new release should be signed off with the `npm run build` command (processed automatically on pre-commit).
 This will update the `lordofpasswords.sw.js` file, which ensures cache invalidation.
 Please do not remove comments like `/* datetime: */` from `index.html` and `lordofpasswords.sw.js` files as the build script relies on them.

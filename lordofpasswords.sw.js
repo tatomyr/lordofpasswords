@@ -1,14 +1,14 @@
-/* eslint-disable no-restricted-globals, no-console */
+/* eslint-disable no-console */
 
 console.log(
   "Latest revision: " +
-    /* datetime: */ "2026-10-18T14:57:57.361Z" /* :datetime */
+    /* datetime: */ "2026-10-18T15:13:57.314Z" /* :datetime */
 )
 
 const appScope = self.registration.scope
 
 const cacheName =
-  `${appScope}@` + /* datetime: */ "2026-10-18T14:57:57.361Z" /* :datetime */
+  `${appScope}@` + /* datetime: */ "2026-10-18T15:13:57.314Z" /* :datetime */
 
 const FILES_TO_CACHE = [
   "./",

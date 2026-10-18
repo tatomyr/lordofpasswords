@@ -16,9 +16,9 @@ const pw3 = (service_, salt_, pwLength, special) => {
     service += pwChar(service.charCodeAt())
   }
   let salt = salt_.toString()
-  if (
-    !((salt.length + 1) % service.length && service.length % (salt.length + 1))
-  ) {
+  if (!(
+    (salt.length + 1) % service.length && service.length % (salt.length + 1)
+  )) {
     salt += pwChar(salt.length + service.length)
   }
   let sum = 0
@@ -40,7 +40,6 @@ const pw3 = (service_, salt_, pwLength, special) => {
     // Service & salt offsets:
     const j = (i + jOffset) % service.length
     const k = (i + kOffset) % innerSalt.length
-    // eslint-disable-next-line max-len
     pwArr[i % pwLength] =
       (pwArr[i % pwLength] || 0) +
       i +

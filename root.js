@@ -23,7 +23,7 @@ const copyPassword = async password => {
   try {
     await navigator.clipboard.writeText(password)
     onSuccessfullCopy()
-  } catch (err) {
+  } catch {
     window.prompt(
       `Could not copy the password. Please do it manually:`,
       password

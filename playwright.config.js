@@ -1,7 +1,5 @@
 import {defineConfig, devices} from "@playwright/test"
 
-// Node 24 defines `process`; ESLint uses the browser env for this project.
-/* eslint-disable no-undef */
 const isCI = Boolean(process.env.CI)
 
 export default defineConfig({
@@ -17,7 +15,7 @@ export default defineConfig({
   projects: [{name: "chromium", use: {...devices["Desktop Chrome"]}}],
   // Playwright starts the static server and stops it after the run.
   webServer: {
-    command: "npx static-server -p 8081",
+    command: "npx http-server -p 8081 -c-1 --silent",
     url: "http://localhost:8081",
     reuseExistingServer: !isCI,
   },
