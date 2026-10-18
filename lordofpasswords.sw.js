@@ -2,13 +2,13 @@
 
 console.log(
   "Latest revision: " +
-    /* datetime: */ "2026-10-18T14:28:59.293Z" /* :datetime */
+    /* datetime: */ "2026-10-18T14:57:57.361Z" /* :datetime */
 )
 
 const appScope = self.registration.scope
 
 const cacheName =
-  `${appScope}@` + /* datetime: */ "2026-10-18T14:28:59.293Z" /* :datetime */
+  `${appScope}@` + /* datetime: */ "2026-10-18T14:57:57.361Z" /* :datetime */
 
 const FILES_TO_CACHE = [
   "./",

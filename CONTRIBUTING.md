@@ -9,11 +9,15 @@ We intentionally don't minify nor optimize the code to show users the actual cod
 
 ## Testing
 
-Start end-to-end testing on `localhost:8080` with `$ npm run cypress`.
-Notice that you have to have your development server started.
+Run all tests in the terminal with `npm test`.
+Playwright starts its own server on port `8081` and stops it after the run.
+The first run on a new machine needs the browser: `npx playwright install chromium`.
 
-Run end-to-end tests in the terminal with `$ npm run e2e`.
-It will run a separate testing server on port `8081`.
+Open the interactive test runner with `npm run test:ui`.
+
+The `tests` folder holds two kinds of tests.
+`app.spec.js` checks the password algorithm in `app.js` without a browser.
+`index.spec.js` drives the page in a browser.
 
 ## Deployment
 
